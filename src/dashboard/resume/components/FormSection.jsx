@@ -17,17 +17,19 @@ function FormSection() {
     <div>
         <div className='flex justify-between items-center'>
           <div className='flex gap-5'>
-            <Link to="/"
-              >
-          <Button><Home/></Button>
-          </Link>
+          {activeFormIndex>1
+            &&<Button size="sm" 
+            onClick={()=>setActiveFormIndex(activeFormIndex-1)}> <ArrowLeft/>   Back</Button> }
+         
+         
+        
           <ThemeColor/>
          
           </div>
           <div className='flex gap-2'>
-            {activeFormIndex>1
+           {/*  {activeFormIndex>1
             &&<Button size="sm" 
-            onClick={()=>setActiveFormIndex(activeFormIndex-1)}> <ArrowLeft/> </Button> }
+            onClick={()=>setActiveFormIndex(activeFormIndex-1)}> <ArrowLeft/> </Button> } */}
             <Button 
             disabled={!enableNext}
             className="flex gap-2" size="sm"

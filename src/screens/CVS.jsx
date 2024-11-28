@@ -1,42 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button, Nav, Navbar } from 'react-bootstrap';
 import { FaUserCircle, FaFileAlt } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Dashboard.css';
+import { Link, useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal/Modal';
-import Loader from "../components/loader"; // Ensure correct import path
+import Loader from "../components/loader";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCv, logout, openCv } from '../store/action/userAppStorage';
-
-
-
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('myCVs');
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // Loader state
-  const [isError, setIsError] = useState(false); // Error state
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
   const [userCVs, setUserCVs] = useState([]);
-  const [isErrorInfo, setIsErrorInfo] = useState(''); // Error message state
-  let { user } = useSelector(state => state.userAuth); // Fetch user from Redux store
+  const [isErrorInfo, setIsErrorInfo] = useState('');
+  let { user } = useSelector(state => state.userAuth);
   let navigate = useNavigate();
   let dispatch = useDispatch();
 
-  // Protect the dashboard - if no user is present, redirect to login
   useEffect(() => {
     if (!user) {
-      navigate('/login'); // Redirect to login page if user is not found
+      navigate('/login');
     }
   }, [user, navigate]);
 
   const handleLogout = async () => {
-    await dispatch( logout())
-    navigate('/login')
+    await dispatch(logout());
+    navigate('/login');
   };
 
-
-  // Fetch all CVs with error handling
   const fetchHandler = async () => {
     try {
       let response = await dispatch(fetchCv(user._id));
@@ -61,152 +52,140 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchHandler();
-  }, []); // empty dependency array to run only on component mount
+  }, []);
 
+  //const dashboardUrl = "https://crea8cv-v3.vercel.app";
 
-
-
-  const dashboardUrl = process.env.REACT_APP_DASHBOARD_URL
-  // Render CVs or an empty state if there's an error
   const renderCVs = () => {
     if (isError) {
       return (
-        <div className="container mt-5 text-center">
-          <h2>Error Loading CVs</h2>
-          <p>{isErrorInfo}</p>
-          <p>Please try refreshing the page or contact support if the issue persists.</p>
+        <div className="container mt-10 text-center">
+          <h2 className="text-2xl font-semibold text-red-600">Error Loading CVs</h2>
+          <p className="text-gray-700">{isErrorInfo}</p>
+          <p className="text-gray-500 mt-4">Please try refreshing the page or contact support if the issue persists.</p>
         </div>
       );
     }
 
     if (userCVs.length === 0) {
       return (
-        <div className="container mt-5 text-center">
-          <h2>No CVs Available</h2>
-          <p>It looks like you haven't uploaded any CVs yet.</p>
-          <p>Get started by adding your CV today!</p>
+        <div className="container mt-10 text-center">
+          <h2 className="text-2xl font-semibold text-gray-700">No CVs Available</h2>
+          <p className="text-gray-600 mt-4">It looks like you haven't uploaded any CVs yet.</p>
+          <p className="text-gray-500 mt-4">Get started by adding your CV today!</p>
         </div>
       );
     }
 
     return userCVs.map((cv) => (
-      <Col xs={12} md={4} key={cv.id} className="mb-4">
-        <Card className="cv-card shadow-sm">
-          <Card.Body>
+      <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-6" key={cv.id}>
+        <div className="bg-white shadow-xl rounded-lg overflow-hidden transition transform hover:scale-105">
+          <div className="p-6">
             <FaFileAlt size={40} className="text-primary mb-3" />
-            <Card.Title>{cv.title}</Card.Title>
-            <Card.Text>
-              <small className="text-muted">Created on: {cv.createdAt}</small>
-            </Card.Text>
-            <Button variant="outline-primary" onClick={() => navigateHandler(cv)}>
+            <h5 className="font-semibold text-xl mb-3 text-gray-900">{cv.title}</h5>
+            <p className="text-gray-600 text-sm mb-3"><small>Created on: {cv.createdAt}</small></p>
+            <button
+              onClick={() => navigateHandler(cv)}
+              className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200"
+            >
               View CV
-            </Button>
-          </Card.Body>
-        </Card>
-      </Col>
+            </button>
+          </div>
+        </div>
+      </div>
     ));
   };
 
   return (
     <>
-      {isLoading && <Loader />} {/* Loader Component */}
-      {isError && <Modal content={isErrorInfo} closeModal={() => setIsError(false)} />} {/* Modal for Error */}
+      {isLoading && <Loader />}
+      {isError && <Modal content={isErrorInfo} closeModal={() => setIsError(false)} />}
 
-      <div className="dashboard-container">
-        <div className={`sidebar ${sidebarOpen ? 'visible' : ''}`}>
-          <div className="sidebar-header d-flex justify-content-between align-items-center">
-            <h4 className="text-white text-center bg-transparent">Dashboard</h4>
-            <Button
-              variant="outline-light"
-              className="d-md-none sidebar-toggle"
+      <div className="flex mt-10 min-h-screen bg-gray-50">
+        {/* Sidebar */}
+        <div className={`fixed mt-10 left-0 w-64 min-h-screen bg-blue-800 text-white ${sidebarOpen ? 'block' : 'hidden'} sm:block`}>
+          <div className="flex justify-between items-center p-6 border-b border-blue-900">
+           
+            <button
+              className="text-white sm:hidden"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
               ☰
-            </Button>
+            </button>
           </div>
-          <Nav className="flex-column">
-            <Nav.Link
-              onClick={() => {
-                window.location.href = dashboardUrl;
-              }}
-              
-            >
-              Create with AI
-            </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                setActiveTab('myCVs');
-                navigate('/cvs');
-              }}
-              className={`text-white ${activeTab === 'myCVs' ? 'active' : ''}`}
+          <nav className="flex flex-col px-4 py-6">
+         
+            <button 
+              onClick={() => { setActiveTab('myCVs'); navigate('/cvs'); }}
+              className={`text-white  py-3 px-4 rounded-md ${activeTab === 'myCVs' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
             >
               My CVs
-            </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                setActiveTab('templates');
-                navigate('/template');
-              }}
-              className={`text-white ${activeTab === 'templates' ? 'active' : ''}`}
+            </button>
+            <button
+              onClick={() => { setActiveTab('myCVs'); navigate('/ai'); }}>
+              Crea8 with AI
+            </button>
+            <button
+              onClick={() => { setActiveTab('templates'); navigate('/template'); }}
+              className={`text-white py-3 px-4 rounded-md ${activeTab === 'templates' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
             >
               Templates
-            </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                setActiveTab('profileSettings');
-                navigate('/profilesetting');
-              }}
-              className={`text-white ${activeTab === 'profileSettings' ? 'active' : ''}`}
+            </button>
+            <button
+              onClick={() => { setActiveTab('profileSettings'); navigate('/profilesetting'); }}
+              className={`text-white py-3 px-4 rounded-md ${activeTab === 'profileSettings' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
             >
               Profile Settings
-            </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                setActiveTab('pricing');
-                navigate('/pricing');
-              }}
-              className={`text-white ${activeTab === 'pricing' ? 'active' : ''}`}
+            </button>
+            <button
+              onClick={() => { setActiveTab('pricing'); navigate('/pricing'); }}
+              className={`text-white py-3 px-4 rounded-md ${activeTab === 'pricing' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
             >
               Pricing Plans
-            </Nav.Link>
-            <Nav.Link onClick={handleLogout} className="text-white">
+            </button>
+            <button
+              onClick={handleLogout}
+              className="text-white py-3 px-4 rounded-md hover:bg-blue-700 mb-2"
+            >
               Logout
-            </Nav.Link>
-          </Nav>
+            </button>
+          </nav>
         </div>
 
-        <Container fluid className="main-content">
-          <Navbar expand="lg" className="shadow-lg mb-4 py-3 header-navbar" style={{ backgroundColor: '#007bff' }}>
-            <Container fluid>
-              <Row className="w-100 align-items-center">
-                <Col xs={6} md={8} className="d-flex justify-content-end align-items-center">
-                  <FaUserCircle size={35} className="me-3 user-icon text-white" />
-                  <Button variant="outline-light" className="ml-auto me-3 logout-btn" style={{ borderRadius: '20px', padding: '0.5rem 1.5rem', fontWeight: '500' }} onClick={handleLogout}>
-                    Logout
-                  </Button>
-                </Col>
-                <Button
-                  variant="outline-light"
-                  className="d-lg-none ms-auto me-3 sidebar-toggle-btn"
-                  onClick={() => setSidebarOpen(!sidebarOpen)}
-                  style={{ fontSize: '1.5rem', padding: '0.5rem', borderRadius: '10px' }}
-                >
-                  ☰
-                </Button>
-              </Row>
-            </Container>
-          </Navbar>
+        {/* Main Content */}
+        <div className="flex-1 ml-64   p-3 pt-0" >
+           <div className="flex justify-between items-center mb-6 bg-white shadow-lg p-4">
+            <div className="flex items-center space-x-6" style={{ width: '100%', padding: '15px' }}>
+             {/*  <FaUserCircle size={35} className="text-blue-600" />
+              <button
+                onClick={handleLogout}
+                className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-200"
+              >
+                Logout
+              </button> */}
+            </div>
+            <button
+              className="sm:hidden text-white bg-blue-600 py-2 px-4 rounded-lg hover:bg-blue-700"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+            >
+              ☰
+            </button>
+          </div> 
+
 
           <div className="content">
-            <h2 className="mb-4">My CVs</h2>
-            <Row>{renderCVs()}</Row>
+            <h2 className="pt-20 p-3 text-2xl font-semibold text-center py-8 text-gray-800 mb-6">My CVs</h2>
+            <div className="flex flex-wrap gap-6">{renderCVs()}</div>
           </div>
-        </Container>
+        </div>
       </div>
     </>
   );
 };
 
 export default Dashboard;
+
+
+
 
 

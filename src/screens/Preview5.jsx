@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import html2pdf from 'html2pdf.js';
+//import html2pdf from 'html2pdf.js';
 import { Document, Packer, Paragraph } from 'docx';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FacebookShareButton, TwitterShareButton, LinkedinShareButton, WhatsappShareButton, FacebookIcon, TwitterIcon, LinkedinIcon, WhatsappIcon } from 'react-share';

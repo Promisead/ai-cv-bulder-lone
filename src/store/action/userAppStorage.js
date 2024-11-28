@@ -95,7 +95,7 @@ export const autoLogin = () => {
         return {
           bool: true,
           message: "Successfully logged in",
-          url: `/dashboard`
+          url: `/cvs`
         };
       } else {
 
@@ -207,7 +207,7 @@ export const login = (data) => {
         return {
           bool: true,
           message: responseData.response.message,
-          url: `/dashboard`
+          url: `/cvs`
         };
       }
 

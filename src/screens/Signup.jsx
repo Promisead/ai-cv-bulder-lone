@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import FormInput from '../components-manual/Input';
-import SubmitBtn from '../components-manual/Submit';
+import FormInput from '../components/Input';
+import SubmitBtn from '../components/Submit';
 import {signup } from '../store/action/userAppStorage';
-import Modal from '../components-manual/Modal/Modal';
-import Loader from "../components-manual/loader";
+import Modal from '../components/Modal/Modal';
+import Loader from "../components/loader";
 
 
 function SignupPage() {

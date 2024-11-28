@@ -5,9 +5,11 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 import "./Home.css";
+import bannerImage from '../assets/image/banner.jpg';
+
 
 const Crea8CV = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const navigateHandler = (to) => {
     navigate(to);
@@ -18,274 +20,178 @@ const Crea8CV = () => {
   }, []);
 
   return (
-    <header className="header" data-aos="fade-down">
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light">
-        <div className="container">
-          <a className="navbar-brand fw-bold fs-2 text-blue" href="#">
-          <FaFileInvoice className="me-2 navbar-brand-text" />
-          <span className="navbar-brand-text">Crea8</span> CV
-            {/* <span>
-              <i className="fa-solid fa-file-invoice"></i>
-            </span>
-            <span className="navbar-brand-text">Crea8</span> CV */}
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarContent"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <div className="collapse navbar-collapse" id="navbarContent">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item dropdown" data-aos="fade-left">
-                <a
-                  className="nav-link dropdown-toggle text-blue fs-18"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Resume Templates
-                </a>
-                <ul
-                  className="dropdown-menu bg-white"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Job CV
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Academic CV
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <button
-              type="button"
-              className="btn btn-login btn-primary ms-lg-4 px-4 fs-16 mt-1 mt-lg-0"
-              onClick={() => navigateHandler("login")}
-              data-aos="fade-left"
+    <>
+       <header className="relative" data-aos="fade-down">
+        {/* Navbar */}
+        <nav className="bg-white shadow-lg">
+          <div className="container mx-auto flex items-center justify-between px- py-4">
+            <a
+              href="#"
+              className="flex items-center text-blue-500 font-bold text-2xl"
             >
-              Login
+              <FaFileInvoice className="mr-2" />
+              <span>Crea8 CV</span>
+            </a>
+            <button
+              className="text-gray-700 lg:hidden focus:outline-none"
+              aria-label="Toggle navigation"
+            >
+              <span className="material-icons">menu</span>
             </button>
+            <div className="hidden lg:flex items-center space-x-6">
+              <div className="relative group" data-aos="fade-left">
+                <button className="text-blue-500 font-medium">
+                  Resume Templates
+                </button>
+                <div className="absolute left-0 hidden group-hover:block bg-white shadow-md py-2 mt-2">
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  >
+                    Job CV
+                  </a>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  >
+                    Academic CV
+                  </a>
+                </div>
+              </div>
+              <button
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                onClick={() => navigateHandler("login")}
+                data-aos="fade-left"
+              >
+                Login
+              </button>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
-      {/* Banner Section */}
-      <div
-        className="header-banner bg-light-blue d-flex align-items-center justify-content-center"
-        data-aos="fade-up"
-      >
-        <div className="container h-100 d-flex flex-column align-items-center justify-content-center text-center">
-          <h1 className="text-uppercase text-white fw-6 lh-1 display-5">
-            Build your professional CV in just 5{" "}
-            <span className="text-lowercase text-white">minutes!</span>
-          </h1>
-          <p className="text-white fs-4 mt-3 mb-5">
-            User-friendly and a great time saver for professionals.
-          </p>
-          <button
-            className="btn btn-lg text-capitalize btn-primary fs-4"
-            onClick={() => navigateHandler("signup")}
-            data-aos="fade-up"
-          >
-            Let's get started
-          </button>
-        </div>
+        {/* Banner Section */}
+       
+     
+        <section
+      className="bg-blue-500 text-center relative bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${bannerImage})` }}
+      data-aos="fade-up"
+    >
+
+<div
+    className="absolute inset-0  bg-blue-500 sm:bg-transparent sm:from-blue-900/95 sm:to-blue-900/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"
+  ></div>
+
+  <div
+    className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8"
+  >
+    <div className="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+      <h1 className="text-3xl font-extrabold text-white sm:text-5xl">
+      Build your professional CV in just 5   minutes!
+
+       
+      </h1>
+
+     
+      <div className="mt-8 flex flex-wrap gap-4 text-center">
+        <a
+          href="#"
+          className="block w-full rounded bg-blue-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+          onClick={() => navigateHandler("signup")}
+          data-aos="fade-up"
+        >
+          Get Started
+        </a>
+
+        <a
+          href="#"
+          className="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-blue-600 shadow hover:text-blue-700 focus:outline-none focus:ring active:text-blue-500 sm:w-auto"
+          onClick={() => navigateHandler("signup")}
+          data-aos="fade-up"
+        
+        
+        >
+          Learn More
+        </a>
       </div>
-    </header>
+    </div>
+  </div>
+</section>
+</header>
+    </>
+ 
+  
   );
 };
 
 const MainContent = () => {
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-    });
+    AOS.init({ duration: 1000 });
   }, []);
 
   return (
     <main>
       {/* Steps Section */}
       <section
-        className="steps py-8"
-        style={{
-          background: "linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)",
-        }}
+        className="bg-gradient-to-r from-gray-100 to-white py-12"
+        data-aos="fade-up"
       >
-        <div>
-          <div className="row section-title  text-center" data-aos="fade-up">
-            <div className="col-12 text-black">
-              <h2
-                className="display-6 text-custom fw-bold"
-                style={{ letterSpacing: "1px" }}
-              >
-                Create Your Perfect Resume in Simple Steps
-              </h2>
-              <p
-                className="text-black fs-4 my-4 mx-auto"
-                style={{ maxWidth: "750px", lineHeight: "1.7" }}
-              >
-                Effortlessly create a job-worthy resume and cover letter that
-                gets you hired faster, with a user-friendly experience.
-              </p>
-            </div>
-          </div>
+        <div className="container mx-auto text-center">
+          <h2 className="text-2xl font-bold text-gray-800">
+            Create Your Perfect Resume in Simple Steps
+          </h2>
+          <p className="mt-4 text-gray-600 max-w-3xl mx-auto">
+            Effortlessly create a job-worthy resume and cover letter that gets
+            you hired faster, with a user-friendly experience.
+          </p>
 
-          <div className="row text-black steps-list">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Step 1 */}
             <div
-              className="steps-item col-lg-6 col-xl-4 text-center text-md-start my-4 d-md-flex align-items-md-center"
+              className="flex flex-col items-center text-center"
               data-aos="fade-up"
             >
-              <div
-                className="steps-item-icon text-white bg-gradient d-flex align-items-center justify-content-center mx-auto ms-md-0 me-md-5 me-lg-4"
-                style={{ width: "70px", height: "70px", borderRadius: "50%" }}
-              >
+              <div className="w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full mb-4">
                 <a href="/template">
-                  <i
-                    className="fa-solid fa-layer-group fa-2x"
-                    style={{ color: "#2575fc" }}
-                  ></i>
+                  <i className="fas fa-layer-group text-xl"></i>
                 </a>
               </div>
-              <div className="steps-item-text mt-4">
-                <h3 className="fs-3 fw-bold text-custom">
-                  Choose Your Template
-                </h3>
-                <p className="text-black fs-5">
-                  Select from a variety of professional templates and colors to
-                  create a standout resume.
-                </p>
-              </div>
+              <h3 className="text-lg font-bold">Choose Your Template</h3>
+              <p className="text-gray-600 mt-2">
+                Select from a variety of professional templates and colors to
+                create a standout resume.
+              </p>
             </div>
 
             {/* Step 2 */}
             <div
-              className="steps-item col-lg-6 col-xl-4 text-center text-md-start my-4 d-md-flex align-items-md-center"
+              className="flex flex-col items-center text-center"
               data-aos="fade-up"
             >
-              <div
-                className="steps-item-icon text-black bg-gradient d-flex align-items-center justify-content-center mx-auto ms-md-0 me-md-5 me-lg-4"
-                style={{ width: "70px", height: "70px", borderRadius: "50%" }}
-              >
+              <div className="w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full mb-4">
                 <a href="form.html">
-                  <i
-                    className="fa-solid fa-file-lines fa-2x"
-                    style={{ color: "#2575fc" }}
-                  ></i>
+                  <i className="fas fa-file-alt text-xl"></i>
                 </a>
               </div>
-              <div className="steps-item-text mt-4">
-                <h3 className="fs-3 fw-bold text-custom">
-                  Place Your Information
-                </h3>
-                <p className="text-black fs-5">
-                  Fill in your details and track your CV with a real-time
-                  preview.
-                </p>
-              </div>
+              <h3 className="text-lg font-bold">Place Your Information</h3>
+              <p className="text-gray-600 mt-2">
+                Fill in your details and track your CV with a real-time preview.
+              </p>
             </div>
 
             {/* Step 3 */}
             <div
-              className="steps-item col-lg-6 col-xl-4 text-center text-md-start my-4 d-md-flex align-items-md-center"
+              className="flex flex-col items-center text-center"
               data-aos="fade-up"
             >
-              <div
-                className="steps-item-icon text-black bg-gradient d-flex align-items-center justify-content-center mx-auto ms-md-0 me-md-5 me-lg-4"
-                style={{ width: "70px", height: "70px", borderRadius: "50%" }}
-              >
-                <i
-                  className="fa-solid fa-download fa-2x"
-                  style={{ color: "#2575fc" }}
-                ></i>
+              <div className="w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full mb-4">
+                <i className="fas fa-download text-xl"></i>
               </div>
-              <div className="steps-item-text mt-4">
-                <h3 className="fs-3 fw-bold text-custom">Download Instantly</h3>
-                <p className="text-black fs-5">
-                  Instantly download your resume in PDF format and share via a
-                  link.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* User Reviews Section */}
-      <section id="user-reviews" className="py-5 bg-white" data-aos="fade-up">
-        <div className="container">
-          <h2
-            className="text-center text-white mb-4"
-            style={{ fontWeight: "700", letterSpacing: "1px" }}
-          >
-            What Our Users Say
-          </h2>
-          <div className="row">
-            {/* Review 1 */}
-            <div className="col-md-4" data-aos="fade-up">
-              <div
-                className="card mb-4 shadow-lg"
-                style={{ borderRadius: "12px" }}
-              >
-                <div className="card-body">
-                  <blockquote className="blockquote mb-0 text-white">
-                    <p>
-                      "This resume builder saved me so much time! Highly
-                      recommended."
-                    </p>
-                    <footer className="blockquote-footer text-white">John Doe</footer>
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-
-            {/* Review 2 */}
-            <div className="col-md-4" data-aos="fade-up">
-              <div
-                className="card mb-4 shadow-lg"
-                style={{ borderRadius: "12px" }}
-              >
-                <div className="card-body">
-                  <blockquote className="blockquote mb-0 text-white">
-                    <p>
-                      "A simple and easy-to-use tool for creating a professional
-                      CV."
-                    </p>
-                    <footer className="blockquote-footer text-white">Jane Smith</footer>
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-
-            {/* Review 3 */}
-            <div className="col-md-4" data-aos="fade-up">
-              <div
-                className="card mb-4 shadow-lg"
-                style={{ borderRadius: "12px" }}
-              >
-                <div className="card-body">
-                  <blockquote className="blockquote mb-0 text-white">
-                    <p>
-                      "I loved the user interface. It made the process quick and
-                      efficient."
-                    </p>
-                    <footer className="blockquote-footer text-white">Michael Brown</footer>
-                  </blockquote>
-                </div>
-              </div>
+              <h3 className="text-lg font-bold">Download Instantly</h3>
+              <p className="text-gray-600 mt-2">
+                Instantly download your resume in PDF format and share via a
+                link.
+              </p>
             </div>
           </div>
         </div>
@@ -297,85 +203,67 @@ const MainContent = () => {
 const Footer = () => {
   return (
     <footer
-      className="pt-5"
+      className="pt-5 bg-gradient-to-r from-blue-600 to-blue-700 text-gray-900"
       data-aos="fade-up"
-      style={{
-        background: "linear-gradient(135deg, #2166EB, #2168EB)",
-        color: "#031229",
-      }}
     >
-      <div className="container my-md-4">
-        <div className="row">
+      <div className="container mx-auto my-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {/* Company Info */}
-          <div className="col-md-6 col-lg-3 my-2">
-            <div
-              className="navbar-brand fw-bold fs-2 d-flex align-items-center"
-              style={{ color: "#f5f5f5" }}
-            >
-              <FaFileInvoice className="me-2 text-white" />
-              <span className="text-white">Crea8 CV</span>
+          <div className="col-span-1 lg:col-span-2 space-y-4">
+            <div className="flex items-center text-white text-2xl font-bold">
+              <FaFileInvoice className="mr-2" />
+              <span>Crea8 CV</span>
             </div>
-            <p
-              className="my-3"
-              style={{ fontSize: "1.1rem", color: "#e0e0e0" }}
-            >
+            <p className="text-gray-300 text-lg">
               Our resume builder helps you create your perfect resume, 100%
               free.
             </p>
-            <div className="d-flex">
-              {/* Social Media Icons */}
+            <div className="flex space-x-3">
               <a
                 href="#"
-                className="me-3 text-white"
-                style={{ fontSize: "1.5rem" }}
+                className="text-white text-2xl transition-colors hover:text-gray-300"
               >
                 <FaFacebookF />
               </a>
               <a
                 href="#"
-                className="me-3 text-white"
-                style={{ fontSize: "1.5rem" }}
+                className="text-white text-2xl transition-colors hover:text-gray-300"
               >
                 <FaTwitter />
               </a>
-              <a href="#" className="text-white" style={{ fontSize: "1.5rem" }}>
+              <a
+                href="#"
+                className="text-white text-2xl transition-colors hover:text-gray-300"
+              >
                 <FaInstagram />
               </a>
             </div>
           </div>
 
           {/* Company Links */}
-          <div className="col-md-6 col-lg-2 my-2">
-            <h5
-              className="fw-bold mb-4"
-              style={{ fontSize: "1.3rem", color: "#f5f5f5" }}
-            >
-              Company
-            </h5>
-            <ul className="list-unstyled">
-              <li className="my-3">
+          <div>
+            <h5 className="text-white text-lg font-bold mb-4">Company</h5>
+            <ul className="space-y-3">
+              <li>
                 <a
                   href="#"
-                  className="text-light text-decoration-none"
-                  style={{ transition: "color 0.3s ease" }}
+                  className="text-gray-300 transition-colors hover:text-white"
                 >
                   About Us
                 </a>
               </li>
-              <li className="my-3">
+              <li>
                 <a
                   href="#"
-                  className="text-light text-decoration-none"
-                  style={{ transition: "color 0.3s ease" }}
+                  className="text-gray-300 transition-colors hover:text-white"
                 >
                   Services
                 </a>
               </li>
-              <li className="my-3">
+              <li>
                 <a
                   href="#"
-                  className="text-light text-decoration-none"
-                  style={{ transition: "color 0.3s ease" }}
+                  className="text-gray-300 transition-colors hover:text-white"
                 >
                   Careers
                 </a>
@@ -384,37 +272,29 @@ const Footer = () => {
           </div>
 
           {/* Community Links */}
-          <div className="col-md-6 col-lg-2 my-2">
-            <h5
-              className="fw-bold mb-4"
-              style={{ fontSize: "1.3rem", color: "#f5f5f5" }}
-            >
-              Community
-            </h5>
-            <ul className="list-unstyled">
-              <li className="my-3">
+          <div>
+            <h5 className="text-white text-lg font-bold mb-4">Community</h5>
+            <ul className="space-y-3">
+              <li>
                 <a
                   href="#"
-                  className="text-light text-decoration-none"
-                  style={{ transition: "color 0.3s ease" }}
+                  className="text-gray-300 transition-colors hover:text-white"
                 >
                   Forum
                 </a>
               </li>
-              <li className="my-3">
+              <li>
                 <a
                   href="#"
-                  className="text-light text-decoration-none"
-                  style={{ transition: "color 0.3s ease" }}
+                  className="text-gray-300 transition-colors hover:text-white"
                 >
                   Blog
                 </a>
               </li>
-              <li className="my-3">
+              <li>
                 <a
                   href="#"
-                  className="text-light text-decoration-none"
-                  style={{ transition: "color 0.3s ease" }}
+                  className="text-gray-300 transition-colors hover:text-white"
                 >
                   Podcast
                 </a>
@@ -423,28 +303,21 @@ const Footer = () => {
           </div>
 
           {/* Support Links */}
-          <div className="col-md-6 col-lg-2 my-2">
-            <h5
-              className="fw-bold mb-4"
-              style={{ fontSize: "1.3rem", color: "#f5f5f5" }}
-            >
-              Support
-            </h5>
-            <ul className="list-unstyled">
-              <li className="my-3">
+          <div>
+            <h5 className="text-white text-lg font-bold mb-4">Support</h5>
+            <ul className="space-y-3">
+              <li>
                 <a
                   href="#"
-                  className="text-light text-decoration-none"
-                  style={{ transition: "color 0.3s ease" }}
+                  className="text-gray-300 transition-colors hover:text-white"
                 >
                   Help Center
                 </a>
               </li>
-              <li className="my-3">
+              <li>
                 <a
                   href="#"
-                  className="text-light text-decoration-none"
-                  style={{ transition: "color 0.3s ease" }}
+                  className="text-gray-300 transition-colors hover:text-white"
                 >
                   Contact Us
                 </a>
@@ -453,31 +326,18 @@ const Footer = () => {
           </div>
 
           {/* Newsletter Subscription */}
-          <div className="col-md-6 col-lg-3 my-2">
-            <h5
-              className="fw-bold mb-4"
-              style={{ fontSize: "1.3rem", color: "#f5f5f5" }}
-            >
-              Subscribe
-            </h5>
-            <p
-              className="mb-4"
-              style={{ fontSize: "1.1rem", color: "#e0e0e0" }}
-            >
+          <div>
+            <h5 className="text-white text-lg font-bold mb-4">Subscribe</h5>
+            <p className="text-gray-300 text-lg mb-4">
               Get the latest updates right in your inbox.
             </p>
-            <div className="input-group mb-3">
+            <div className="flex">
               <input
                 type="email"
-                className="form-control"
+                className="w-full rounded-l-full px-4 py-2 text-gray-900 focus:outline-none"
                 placeholder="Email address"
-                style={{ borderRadius: "25px 0 0 25px", padding: "10px" }}
               />
-              <button
-                className="btn btn-primary"
-                type="submit"
-                style={{ borderRadius: "0 25px 25px 0", padding: "10px 20px" }}
-              >
+              <button className="bg-blue-500 text-white rounded-r-full px-6 py-2 hover:bg-blue-600 transition-colors">
                 Subscribe
               </button>
             </div>
@@ -486,32 +346,24 @@ const Footer = () => {
       </div>
 
       {/* Bottom Section */}
-      <div className="pt-4" style={{ background: "#141414" }}>
-        <div className="container">
-          <div className="row justify-content-between align-items-center">
-            {/* Copyright */}
-            <div className="col-md-8 my-1">
-              <small className="text-light">
-                © 2024 Crea8 CV. All Rights Reserved.
-              </small>
-            </div>
-            {/* Legal Links */}
-            <div className="col-md-4 my-1 text-md-end">
-              <a
-                href="#"
-                className="text-light text-decoration-none me-4"
-                style={{ transition: "color 0.3s ease" }}
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-light text-decoration-none"
-                style={{ transition: "color 0.3s ease" }}
-              >
-                Terms of Use
-              </a>
-            </div>
+      <div className="bg-blue-800 py-4">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+          <small className="text-gray-400 text-sm">
+            © 2024 Crea8 CV. All Rights Reserved.
+          </small>
+          <div className="flex space-x-6 text-sm">
+            <a
+              href="#"
+              className="text-gray-400 transition-colors hover:text-white"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="#"
+              className="text-gray-400 transition-colors hover:text-white"
+            >
+              Terms of Use
+            </a>
           </div>
         </div>
       </div>
@@ -527,114 +379,109 @@ const PricingSection = () => {
   }, []);
 
   return (
-    <section id="pricing" className="py-8 bg-light">
-      <div className="container">
-        <div className="row section-title text-center mb-5" data-aos="fade-up">
-          <div className="col-12">
-            <h2 className="display-5 text-custom fw-bold">Choose Your Plan</h2>
-            <p className="text-light fs-4 mt-3">
-              Select the perfect plan that suits your needs.
-            </p>
-          </div>
+    <section id="pricing" className="py-16 bg-gray-100">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-10" data-aos="fade-up">
+          <h2 className="text-4xl font-bold text-blue-600">Choose Your Plan</h2>
+          <p className="text-lg text-gray-600 mt-3">
+            Select the perfect plan that suits your needs.
+          </p>
         </div>
 
-        <div className="row justify-content-center text-center">
+        <div className="flex flex-wrap justify-center gap-8">
           {/* Basic Plan */}
-          <div className="col-lg-4 col-md-6 mb-5" data-aos="fade-up">
-            <div className="card shadow-lg border-0">
-              <div className="card-header bg-transparent">
-                <h3 className="fs-4 fw-bold text-white">Basic</h3>
-              </div>
-              <div className="card-body">
-                <h4 className="display-6 text-white">$9</h4>
-                <p className="text-white fs-5">Per month</p>
-                <ul className="list-unstyled my-4">
-                  <li className="mb-3  text-white">
-                    <i className="fa-solid fa-check text-white me-2"></i>5 CV
-                    Templates
-                  </li>
-                  <li className="mb-3  text-white">
-                    <i className="fa-solid fa-check text-white me-2"></i>
-                    Download in PDF
-                  </li>
-                  <li className="mb-3  text-white">
-                    <i className="fa-solid fa-check text-white me-2"></i>
-                    Email Support
-                  </li>
-                </ul>
-                <a href="#" className="btn btn-primary btn-block">
-                  Get Started
-                </a>
-              </div>
+          <div
+            className="max-w-sm bg-blue-600 text-white shadow-lg rounded-lg p-6"
+            data-aos="fade-up"
+          >
+            <div className="text-center mb-4">
+              <h3 className="text-2xl font-semibold">Basic</h3>
             </div>
+            <div className="text-center mb-6">
+              <h4 className="text-5xl font-bold">$9</h4>
+              <p className="text-lg">Per month</p>
+            </div>
+            <ul className="space-y-4 mb-6">
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-check"></i> 5 CV Templates
+              </li>
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-check"></i> Download in PDF
+              </li>
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-check"></i> Email Support
+              </li>
+            </ul>
+            <a
+              href="#"
+              className="block w-full bg-white text-blue-600 py-2 rounded-lg font-semibold text-center"
+            >
+              Get Started
+            </a>
           </div>
 
           {/* Pro Plan */}
           <div
-            className="col-lg-4 col-md-6 mb-5"
+            className="max-w-sm bg-white text-blue-600 shadow-lg rounded-lg p-6"
             data-aos="fade-up"
             data-aos-delay="200"
           >
-            <div className="card shadow-lg border-0 bg-white">
-              <div className="card-header bg-transparent">
-                <h3 className="fs-4 fw-bold text-blue">Pro</h3>
-              </div>
-              <div className="card-body">
-                <h4 className="display-6 text-blue">$19</h4>
-                <p className="text-grey fs-5">Per month</p>
-                <ul className="list-unstyled my-4">
-                  <li className="mb-3">
-                    <i className="fa-solid fa-check text-blue me-2"></i>
-                    15 CV Templates
-                  </li>
-                  <li className="mb-3">
-                    <i className="fa-solid fa-check text-blue me-2"></i>
-                    Download in PDF and Word
-                  </li>
-                  <li className="mb-3">
-                    <i className="fa-solid fa-check text-blue me-2"></i>
-                    Priority Email Support
-                  </li>
-                </ul>
-                <a href="#" className="btn btn-primary btn-block">
-                  Get Started
-                </a>
-              </div>
+            <div className="text-center mb-4">
+              <h3 className="text-2xl font-semibold">Pro</h3>
             </div>
+            <div className="text-center mb-6">
+              <h4 className="text-5xl font-bold">$19</h4>
+              <p className="text-lg text-gray-500">Per month</p>
+            </div>
+            <ul className="space-y-4 mb-6">
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-check"></i> 15 CV Templates
+              </li>
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-check"></i> Download in PDF and Word
+              </li>
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-check"></i> Priority Email Support
+              </li>
+            </ul>
+            <a
+              href="#"
+              className="block w-full bg-blue-600 text-white py-2 rounded-lg font-semibold text-center"
+            >
+              Get Started
+            </a>
           </div>
 
           {/* Premium Plan */}
           <div
-            className="col-lg-4 col-md-6 mb-5"
+            className="max-w-sm bg-primary text-white shadow-lg rounded-lg p-6"
             data-aos="fade-up"
             data-aos-delay="400"
           >
-            <div className="card shadow-lg border-0 bg-primary text-white">
-              <div className="card-header bg-transparent">
-                <h3 className="fs-4 fw-bold text-white">Premium</h3>
-              </div>
-              <div className="card-body">
-                <h4 className="display-6 text-white">$29</h4>
-                <p className="fs-5">Per month</p>
-                <ul className="list-unstyled my-4">
-                  <li className="mb-3">
-                    <i className="fa-solid fa-check text-white me-2"></i>
-                    Unlimited CV Templates
-                  </li>
-                  <li className="mb-3">
-                    <i className="fa-solid fa-check text-white me-2"></i>
-                    Download in All Formats
-                  </li>
-                  <li className="mb-3">
-                    <i className="fa-solid fa-check text-white me-2"></i>
-                    24/7 Support
-                  </li>
-                </ul>
-                <a href="#" className="btn btn-outline-light btn-block">
-                  Get Started
-                </a>
-              </div>
+            <div className="text-center mb-4">
+              <h3 className="text-2xl font-semibold">Premium</h3>
             </div>
+            <div className="text-center mb-6">
+              <h4 className="text-5xl font-bold">$29</h4>
+              <p className="text-lg">Per month</p>
+            </div>
+            <ul className="space-y-4 mb-6">
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-check"></i> Unlimited CV Templates
+              </li>
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-check"></i> Download in All Formats
+              </li>
+              <li className="flex items-center gap-3">
+                <i className="fa-solid fa-check"></i> 24/7 Support
+              </li>
+            </ul>
+            <a
+              href="#"
+              className="block w-full bg-white text-blue-600 py-2 rounded-lg font-semibold text-center"
+            >
+              Get Started
+            </a>
           </div>
         </div>
       </div>

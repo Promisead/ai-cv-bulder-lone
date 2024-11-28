@@ -30,24 +30,28 @@ function Header() {
   
 
   return (
-    <div className="main-content pt- ">
-      <nav className="shadow-lg mb-4 py-5 bg-[#3A60D0] ">
+    <div className="main-content ">
+      <nav className="fixed top-0 w-full  z-10 shadow-lg mb-4 py-5 bg-[#3A60D0] ">
         {user ? (
-          <div className="container mx-auto flex justify-between items-center">
-            <Link to={"/dashboard"}>
+          <div className="container mx-2 flex justify-between items-center">
+            <Link to={"/cvs"}>
               <Button variant="outline">Dashboard</Button>
             </Link>
             <Link onClick={handleLogout} >
               <Button variant="outline">Logout</Button>
             </Link>
           </div>
-        ) : (
+        ) : 
+        <div className="ml-10">
+          (
           <Link to='/Login'>
             <div className="container mx-auto flex justify-between items-center">
               <Button variant="outline">Login</Button>
             </div>
           </Link>
-        )}
+        )
+        </div>
+        }
       </nav>
     </div>
   );

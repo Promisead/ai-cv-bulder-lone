@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Nav, Navbar, Button } from 'react-bootstrap';
+//import { Container, Row, Col, Nav, Navbar, Button } from 'react-bootstrap';
 import { FaUserCircle } from 'react-icons/fa';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Dashboard.css'; // Ensure you have the correct styling
 import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal/Modal'; // Ensure correct import path
 import Loader from "../components/loader"; // Ensure correct import path
-import { useDispatch, useSelector } from 'react-redux'; 
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/action/userAppStorage';
 
 
@@ -28,10 +26,10 @@ const PricingPlan = () => {
     }, [user, navigate]);
 
     const handleLogout = async () => {
-        await dispatch( logout())
+        await dispatch(logout())
         navigate('/login')
-      };
-    
+    };
+
 
 
     const handleTabChange = (tab, path) => {
@@ -39,90 +37,115 @@ const PricingPlan = () => {
         navigate(path);
     };
 
-    const dashboardUrl = process.env.REACT_APP_DASHBOARD_URL;
+    //const dashboardUrl = "https://crea8cv-v3.vercel.app";
 
     const renderContent = () => (
-        <main className="bg-light p-4 rounded">
-            <h2 className="mb-5 text-center  text-primary font-weight-bold">Choose Your Plan</h2>
-            <Row>
-                {[
-                    { title: 'Basic', price: '$10/month', description: 'Perfect for individuals starting out.', btnColor: 'outline-primary' },
-                    { title: 'Standard', price: '$20/month', description: 'Ideal for small teams with extra features.', btnColor: 'outline-success' },
-                    { title: 'Premium', price: '$30/month', description: 'Best for larger organizations.', btnColor: 'outline-warning' },
-                ].map((plan, index) => (
-                    <Col md={4} className="mb-4" key={index}>
-                        <div className="card pricing-card shadow-sm">
-                            <div className="card-body text-center">
-                                <h5 className="card-title font-weight-bold text-dark mb-3">{plan.title}</h5>
-                                <h6 className="card-subtitle text-muted mb-3 font-weight-bold">{plan.price}</h6>
-                                <p className="card-text mb-4 text-secondary">{plan.description}</p>
-                                <Button variant={plan.btnColor} className="px-4 py-2 rounded-pill">Choose Plan</Button>
-                            </div>
-                        </div>
-                    </Col>
-                ))}
-            </Row>
+        <main className="bg-gray-100 p-8 rounded-lg">
+          <h2 className="mb-8 text-center text-4xl font-extrabold text-blue-600">Choose Your Plan</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { title: 'Basic', price: '$10/month', description: 'Perfect for individuals starting out.', btnColor: 'bg-blue-500 hover:bg-blue-700' },
+              { title: 'Standard', price: '$20/month', description: 'Ideal for small teams with extra features.', btnColor: 'bg-green-500 hover:bg-green-700' },
+              { title: 'Premium', price: '$30/month', description: 'Best for larger organizations.', btnColor: 'bg-yellow-500 hover:bg-yellow-700' },
+            ].map((plan, index) => (
+              <div className="bg-white p-6 rounded-xl shadow-lg text-center" key={index}>
+                <h5 className="text-2xl font-semibold text-gray-800 mb-4">{plan.title}</h5>
+                <h6 className="text-lg text-gray-500 mb-4 font-semibold">{plan.price}</h6>
+                <p className="text-gray-600 mb-6">{plan.description}</p>
+                <button className={`${plan.btnColor} text-white px-6 py-3 rounded-full font-semibold`}>
+                  Choose Plan
+                </button>
+              </div>
+            ))}
+          </div>
         </main>
-    );
+      );
+      
 
     return (
         <>
             {isLoading && <Loader />} {/* Loader Component */}
             {isError && <Modal content={isErrorInfo} closeModal={() => setIsError(false)} />} {/* Modal for Error */}
-            <div className="dashboard-container bg-gradient">
-                <div className={`sidebar ${sidebarOpen ? 'visible' : ''} shadow`}>
-                    <div className="sidebar-header d-flex justify-content-between align-items-center p-3  text-white">
-                        <h4 className="text-center w-100">Dashboard</h4>
-                        <Button variant="outline-light" className="d-md-none" onClick={() => setSidebarOpen(!sidebarOpen)}>☰</Button>
-                    </div>
-                    <Nav className="flex-column text-light">
-                        <Nav.Link
-                            onClick={() => window.location.href = dashboardUrl}
-                            className={`sidebar-link ${activeTab === "myCVs" ? "active" : ""}`}
+            <div className="mt-20  flex min-h-screen bg-gray-50">
+                {/* Sidebar */}
+                <div className={`w-64 min-h-screen bg-blue-800 text-white ${sidebarOpen ? 'block' : 'hidden'} sm:block`}>
+                    <div className="flex justify-between items-center p-6 border-b border-blue-900">
+                        <h4 className="text-xl font-semibold text-center">Dashboard</h4>
+                        <button
+                            className="text-white sm:hidden"
+                            onClick={() => setSidebarOpen(!sidebarOpen)}
                         >
-                            Create with AI
-                        </Nav.Link>
-                        {[
-                            { name: 'My CVs', path: '/cvs' },
-                            { name: 'Templates', path: '/template' },
-                            { name: 'Profile Settings', path: '/profilesetting' },
-                            { name: 'pricing', path: '/pricing' },
-                        ].map((item, index) => (
-                            <Nav.Link
-                                key={index}
-                                onClick={() => handleTabChange(item.name.toLowerCase().replace(' ', ''), item.path)}
-                                className={`sidebar-link ${activeTab === item.name.toLowerCase().replace(' ', '') ? 'active' : ''}`}
-                            >
-                                {item.name}
-                            </Nav.Link>
-                        ))}
-                        <Nav.Link onClick={handleLogout} className="sidebar-link">
+                            ☰
+                        </button>
+                    </div>
+                    <nav className="flex flex-col px-4 py-6">
+                       
+                        <button
+                            onClick={() => { setActiveTab('myCVs'); navigate('/cvs'); }}
+                            className={`text-white py-3 px-4 rounded-md ${activeTab === 'myCVs' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
+                        >
+                            My CVs
+                        </button>
+
+                        <button
+              onClick={() => {
+                setActiveTab("ai");
+                navigate("/ai");
+              }}
+              className="text-white py-3 px-4 rounded-md hover:bg-blue-700 mb-2"
+            >
+              Create with AI
+            </button>
+                        <button
+                            onClick={() => { setActiveTab('templates'); navigate('/template'); }}
+                            className={`text-white py-3 px-4 rounded-md ${activeTab === 'templates' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
+                        >
+                            Templates
+                        </button>
+                        <button
+                            onClick={() => { setActiveTab('profileSettings'); navigate('/profilesetting'); }}
+                            className={`text-white py-3 px-4 rounded-md ${activeTab === 'profileSettings' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
+                        >
+                            Profile Settings
+                        </button>
+                        <button
+                            onClick={() => { setActiveTab('pricing'); navigate('/pricing'); }}
+                            className={`text-white py-3 px-4 rounded-md ${activeTab === 'pricing' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
+                        >
+                            Pricing Plans
+                        </button>
+                        <button
+                            onClick={handleLogout}
+                            className="text-white py-3 px-4 rounded-md hover:bg-blue-700 mb-2"
+                        >
                             Logout
-                        </Nav.Link>
-                    </Nav>
+                        </button>
+                    </nav>
                 </div>
 
-                <Container fluid className="main-content">
-                    <Navbar expand="lg" className="shadow-sm mb-4 p-3 header-navbar bg-primary text-white sticky-top">
-                        <Container fluid>
-                            <Row className="w-100 align-items-center">
-                                <Col xs={6} md={8} className="d-flex justify-content-end align-items-center">
-                                    <FaUserCircle size={35} className="me-3 user-icon" />
-                                    <Button variant="outline-light" className="ml-auto me-3 logout-btn rounded-pill">
-                                        Logout
-                                    </Button>
-                                </Col>
-                                <Button variant="outline-light" className="d-lg-none sidebar-toggle-btn rounded-circle" onClick={() => setSidebarOpen(!sidebarOpen)}>
-                                    ☰
-                                </Button>
-                            </Row>
-                        </Container>
-                    </Navbar>
+                <div className="flex-1 p-3 pt-0" >
+                    <div className="flex justify-between items-center mb-6 bg-white shadow-lg p-4">
+                        <div className="flex items-center space-x-6" style={{ width: '100%', padding: '15px' }}>
+                           {/*  <FaUserCircle size={35} className="text-blue-600" />
+                            <button
+                                onClick={handleLogout}
+                                className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-200"
+                            >
+                                Logout
+                            </button> */}
+                        </div>
+                        <button
+                            className="sm:hidden text-white bg-blue-600 py-2 px-4 rounded-lg hover:bg-blue-700"
+                            onClick={() => setSidebarOpen(!sidebarOpen)}
+                        >
+                            ☰
+                        </button>
+                    </div>
 
                     <div className="content">
                         {renderContent()}
                     </div>
-                </Container>
+                </div>
             </div>
         </>
     );

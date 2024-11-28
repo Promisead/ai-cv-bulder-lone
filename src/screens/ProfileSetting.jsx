@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Nav, Navbar, Button, Form } from 'react-bootstrap';
+//import { Container, Row, Col, Nav, Navbar, Button, Form } from 'react-bootstrap';
 import { FaUserCircle } from 'react-icons/fa';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Dashboard.css';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal/Modal';
 import Loader from "../components/loader";
-import { useDispatch, useSelector } from 'react-redux'; 
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/action/userAppStorage';
 import { updateUser } from '../store/action/userAppStorage';
 
@@ -36,10 +34,10 @@ const ProfileSettings = () => {
 
 
     const handleLogout = async () => {
-        await dispatch( logout())
+        await dispatch(logout())
         navigate('/login')
-      };
-    
+    };
+
 
 
 
@@ -48,12 +46,12 @@ const ProfileSettings = () => {
         setIsUser({ ...isUser, [name]: value });
     };
 
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true)
-        
+
         let response = await dispatch(updateUser(isUser))
 
         if (!response.bool) {
@@ -68,255 +66,262 @@ const ProfileSettings = () => {
     }
 
 
-const dashboardUrl = process.env.REACT_APP_DASHBOARD_URL
-  const renderContent = () =>  {
-        return (<>
-            {isUser && <main className="bg-white p-4">
-                <h2 className=" mb-4">Profile Settings</h2>
-                <Form onSubmit={handleSubmit}>
-                    {/* Existing profile form */}
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formFullName">
-                            <Form.Label>Full Name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="fullName"
-                                value={isUser.fullName}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
+    const dashboardUrl = "https://crea8cv-v3.vercel.app"
+    const renderContent = () => {
+        return (
+            <>
+                {isUser && (
+                    <main className="bg-white p-8 shadow-lg rounded-lg max-w-3xl mx-auto mt-10 animate-fadeIn">
+                        <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+                            Profile Settings
+                        </h2>
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            {/* Profile Information */}
+                            <div>
+                                <h3 className="text-xl font-medium text-gray-700 mb-4">
+                                    Profile Information
+                                </h3>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label htmlFor="formFullName" className="block text-gray-600 font-medium">
+                                            Full Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="formFullName"
+                                            name="fullName"
+                                            value={isUser.fullName}
+                                            onChange={handleChange}
+                                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="formEmail" className="block text-gray-600 font-medium">
+                                            Email Address
+                                        </label>
+                                        <input
+                                            type="email"
+                                            id="formEmail"
+                                            name="email"
+                                            value={isUser.email}
+                                            onChange={handleChange}
+                                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
 
-                        <Form.Group as={Col} controlId="formEmail">
-                            <Form.Label>Email Address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                name="email"
-                                value={isUser.email}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                    </Row>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label htmlFor="formPhone" className="block text-gray-600 font-medium">
+                                        Phone Number
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="formPhone"
+                                        name="phone"
+                                        value={isUser.phone}
+                                        onChange={handleChange}
+                                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="formUsername" className="block text-gray-600 font-medium">
+                                        Username
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="formUsername"
+                                        name="username"
+                                        value={isUser.username}
+                                        onChange={handleChange}
+                                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                    />
+                                </div>
+                            </div>
 
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formPhone">
-                            <Form.Label>Phone Number</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="phone"
-                                value={isUser.phone}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
+                            {/* Password Section */}
+                            <div>
+                                <h3 className="text-xl font-medium text-gray-700 mb-4">
+                                    Change Password
+                                </h3>
+                                <label htmlFor="formPassword" className="block text-gray-600 font-medium">
+                                    New Password
+                                </label>
+                                <input
+                                    type="password"
+                                    id="formPassword"
+                                    name="password"
+                                    value={isUser.password}
+                                    onChange={handleChange}
+                                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Enter new password"
+                                />
+                            </div>
 
-                        <Form.Group as={Col} controlId="formUsername">
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="username"
-                                value={isUser.username}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                    </Row>
+                            {/* Payment Information Section */}
+                            <div>
+                                <h3 className="text-xl font-medium text-gray-700 mb-4">
+                                    Payment Information
+                                </h3>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label htmlFor="formCardNumber" className="block text-gray-600 font-medium">
+                                            Card Number
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="formCardNumber"
+                                            name="cardNumber"
+                                            value={isUser.cardNumber}
+                                            onChange={handleChange}
+                                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                            placeholder="Enter your card number"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="formExpiryDate" className="block text-gray-600 font-medium">
+                                            Expiry Date
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="formExpiryDate"
+                                            name="expiryDate"
+                                            value={isUser.expiryDate}
+                                            onChange={handleChange}
+                                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                            placeholder="MM/YY"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label htmlFor="formCVV" className="block text-gray-600 font-medium">
+                                            CVV
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="formCVV"
+                                            name="cvv"
+                                            value={isUser.cvv}
+                                            onChange={handleChange}
+                                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                            placeholder="CVV"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="formBillingAddress" className="block text-gray-600 font-medium">
+                                            Billing Address
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="formBillingAddress"
+                                            name="billingAddress"
+                                            value={isUser.billingAddress}
+                                            onChange={handleChange}
+                                            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                            placeholder="Enter your billing address"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
 
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formJobTitle">
-                            <Form.Label>Job Title</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="jobTitle"
-                                value={isUser.jobTitle}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-
-                        <Form.Group as={Col} controlId="formCompany">
-                            <Form.Label>Company</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="company"
-                                value={isUser.company}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                    </Row>
-
-
-
-                    {/* Password Section */}
-                    <h4 className="mt-4">Change Password</h4>
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formPassword">
-                            <Form.Label>New Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                name="password"
-                                value={isUser.password}
-                                onChange={handleChange}
-                                placeholder="Enter new password"
-                            />
-                        </Form.Group>
-                    </Row>
-
-                    {/* Payment Information Section */}
-                    <h4 className="mt-4">Payment Information</h4>
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formCardNumber">
-                            <Form.Label>Card Number</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="cardNumber"
-                                value={isUser.cardNumber}
-                                onChange={handleChange}
-                                placeholder="Enter your card number"
-                            />
-                        </Form.Group>
-                    </Row>
-
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formExpiryDate">
-                            <Form.Label>Expiry Date</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="expiryDate"
-                                value={isUser.expiryDate}
-                                onChange={handleChange}
-                                placeholder="MM/YY"
-                            />
-                        </Form.Group>
-
-                        <Form.Group as={Col} controlId="formCVV">
-                            <Form.Label>CVV</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="cvv"
-                                value={isUser.cvv}
-                                onChange={handleChange}
-                                placeholder="CVV"
-                            />
-                        </Form.Group>
-                    </Row>
-
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formBillingAddress">
-                            <Form.Label>Billing Address</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="billingAddress"
-                                value={isUser.billingAddress}
-                                onChange={handleChange}
-                                placeholder="Enter your billing address"
-                            />
-                        </Form.Group>
-                    </Row>
-
-                    <Button variant="primary" type="submit" className="w-100">
-                        Save Changes
-                    </Button>
-                </Form>
-            </main>}
-        </>
-
+                            {/* Save Button */}
+                            <button
+                                type="submit"
+                                className="w-full bg-blue-500 text-white py-3 rounded-md font-medium shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+                            >
+                                Save Changes
+                            </button>
+                        </form>
+                    </main>
+                )}
+            </>
         );
     };
+
 
     return (
         <>
             {isLoading && <Loader />} {/* Loader Component */}
             {isError && <Modal content={isErrorInfo} closeModal={() => setIsError(false)} />} {/* Modal for Error */}
-            <div className="dashboard-container">
-                <div className={`sidebar ${sidebarOpen ? 'visible' : ''}`}>
-                    <div className="sidebar-header d-flex justify-content-between align-items-center">
-                        <h4 className="text-white text-center bg-transparent">Dashboard</h4>
-                        <Button
-                            variant="outline-light"
-                            className="d-md-none sidebar-toggle"
+            <div className="mt-20 flex min-h-screen bg-gray-50">
+                {/* Sidebar */}
+                <div className={`w-64 min-h-screen bg-blue-800 text-white ${sidebarOpen ? 'block' : 'hidden'} sm:block`}>
+                    <div className="flex justify-between items-center p-6 border-b border-blue-900">
+                        <h4 className="text-xl font-semibold text-center">Dashboard</h4>
+                        <button
+                            className="text-white sm:hidden"
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                         >
                             ☰
-                        </Button>
+                        </button>
                     </div>
-
-                    <Nav className="flex-column">
-            <Nav.Link
-              onClick={() => {
-                window.location.href = dashboardUrl;
-              }}
-              className={`text-white ${activeTab === "myCVs" ? "active" : ""}`}
-            >
-              Create with AI
-            </Nav.Link>
-                        <Nav.Link
-                            onClick={() => {
-                                setActiveTab('myCVs');
-                                navigate('/cvs');
-                            }}
-                            className={`text-white ${activeTab === 'myCVs' ? 'active' : ''}`}
+                    <nav className="flex flex-col px-4 py-6">
+                       
+                        <button
+                            onClick={() => { setActiveTab('myCVs'); navigate('/cvs'); }}
+                            className={`text-white py-3 px-4 rounded-md ${activeTab === 'myCVs' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
                         >
                             My CVs
-                        </Nav.Link>
-                        <Nav.Link
-                            onClick={() => {
-                                setActiveTab('templates');
-                                navigate('/template');
-                            }}
-                            className={`text-white ${activeTab === 'templates' ? 'active' : ''}`}
+                        </button>
+                        <button
+                            onClick={() => { setActiveTab("ai");
+                                navigate("/ai");}}
+                            className="text-white py-3 px-4 rounded-md hover:bg-blue-700 mb-2"
+                        >
+                            Create with AI
+                        </button>
+                        <button
+                            onClick={() => { setActiveTab('templates'); navigate('/template'); }}
+                            className={`text-white py-3 px-4 rounded-md ${activeTab === 'templates' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
                         >
                             Templates
-                        </Nav.Link>
-                        <Nav.Link
-                            onClick={() => {
-                                setActiveTab('profileSettings');
-                                navigate('/profilesetting');
-                            }}
-                            className={`text-white ${activeTab === 'profileSettings' ? 'active' : ''}`}
+                        </button>
+                        <button
+                            onClick={() => { setActiveTab('profileSettings'); navigate('/profilesetting'); }}
+                            className={`text-white py-3 px-4 rounded-md ${activeTab === 'profileSettings' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
                         >
                             Profile Settings
-                        </Nav.Link>
-                        <Nav.Link
-                            onClick={() => {
-                                setActiveTab('pricing');
-                                navigate('/pricing');
-                            }}
-                            className={`text-white ${activeTab === 'pricing' ? 'active' : ''}`}
+                        </button>
+                        <button
+                            onClick={() => { setActiveTab('pricing'); navigate('/pricing'); }}
+                            className={`text-white py-3 px-4 rounded-md ${activeTab === 'pricing' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
                         >
                             Pricing Plans
-                        </Nav.Link>
-                        <Nav.Link onClick={handleLogout} className="text-white">
+                        </button>
+                        <button
+                            onClick={handleLogout}
+                            className="text-white py-3 px-4 rounded-md hover:bg-blue-700 mb-2"
+                        >
                             Logout
-                        </Nav.Link>
-                    </Nav>
+                        </button>
+                    </nav>
                 </div>
 
-                <Container fluid className="main-content">
-                    <Navbar expand="lg" className="shadow-lg mb-4 py-3 header-navbar" style={{ backgroundColor: '#007bff' }}>
-                        <Container fluid>
-                            <Row className="w-100 align-items-center">
-
-
-                                <Col xs={6} md={8} className="d-flex justify-content-end align-items-center">
-                                    <FaUserCircle size={35} className="me-3 user-icon text-white" />
-                                    <Button variant="outline-light" className="ml-auto me-3 logout-btn" style={{ borderRadius: '20px', padding: '0.5rem 1.5rem', fontWeight: '500' }} onClick={handleLogout}>
-                                        Logout
-                                    </Button>
-                                </Col>
-
-                                <Button
-                                    variant="outline-light"
-                                    className="d-lg-none ms-auto me-3 sidebar-toggle-btn"
-                                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                                    style={{ fontSize: '1.5rem', padding: '0.5rem', borderRadius: '10px' }}
-                                >
-                                    ☰
-                                </Button>
-                            </Row>
-                        </Container>
-                    </Navbar>
+                <div className="flex-1 p-3 pt-0" >
+                    <div className="flex justify-between items-center mb-6 bg-white shadow-lg p-4">
+                        <div className="flex items-center space-x-6" style={{ width: '100%', padding: '15px' }}>
+                         {/*    <FaUserCircle size={35} className="text-blue-600" />
+                            <button
+                                onClick={handleLogout}
+                                className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-200"
+                            >
+                                Logout
+                            </button> */}
+                        </div>
+                        <button
+                            className="sm:hidden text-white bg-blue-600 py-2 px-4 rounded-lg hover:bg-blue-700"
+                            onClick={() => setSidebarOpen(!sidebarOpen)}
+                        >
+                            ☰
+                        </button>
+                    </div>
 
                     <div className="content">
                         {renderContent()}
                     </div>
-                </Container>
+                </div>
             </div>
 
         </>
