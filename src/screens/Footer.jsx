@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {/* Company Info */}
           <div className="col-span-1 lg:col-span-2 space-y-4">
-            <div className="flex items-center text-white text-2xl font-bold">
+            <div className="navbar-brand flex items-center text-white text-2xl font-bold">
               <FaFileInvoice className="mr-2" />
               <span>Crea8 CV</span>
             </div>

@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 import "./Home.css";
-import bannerImage from '../assets/image/banner.jpg';
+import bannerImage from "../assets/image/banner.jpg";
 import Footer from "./Footer";
 
 const Crea8CV = () => {
@@ -21,7 +21,7 @@ const Crea8CV = () => {
 
   return (
     <>
-       <header className="relative" data-aos="fade-down">
+      <header className="relative" data-aos="fade-down">
         {/* Navbar */}
         <nav className="bg-white shadow-lg">
           <div className="container mx-auto flex items-center justify-between px- py-4">
@@ -70,55 +70,43 @@ const Crea8CV = () => {
         </nav>
 
         {/* Banner Section */}
-       
-     
+
         <section
-      className="bg-blue-500 text-center relative bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${bannerImage})` }}
-      data-aos="fade-up"
-    >
-
-<div
-    className="absolute inset-0  bg-blue-500 sm:bg-transparent sm:from-blue-900/95 sm:to-blue-900/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"
-  ></div>
-
-  <div
-    className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8"
-  >
-    <div className="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-      <h1 className="text-3xl font-extrabold text-white sm:text-5xl">
-      Build your professional CV in just 5   minutes!
-
-       
-      </h1>
-
-     
-      <div className="mt-8 flex flex-wrap gap-4 text-center">
-        <Link to="/signup"
-          className="block w-full rounded bg-blue-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
-          onClick={() => navigateHandler("signup")}
+          className="header bg-blue-500 text-center relative bg-cover bg-center bg-no-repeat header-banner"
+          style={{ backgroundImage: `url(${bannerImage})` }}
           data-aos="fade-up"
         >
-          Get Started
-          </Link>
+          <div className="navbar navbar-expand-lg navbar-light absolute inset-0  bg-blue-500 sm:bg-transparent sm:from-blue-900/95 sm:to-blue-900/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
 
-        <Link to="/signup"
-          className="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-blue-600 shadow hover:text-blue-700 focus:outline-none focus:ring active:text-blue-500 sm:w-auto"
-         
-          data-aos="fade-up"
-        
-        
-        >
-          Learn More
-        </Link>
-      </div>
-    </div>
-  </div>
-</section>
-</header>
+          <div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
+            <div className="container max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+              <h1 className="text-3xl font-extrabold text-white sm:text-5xl">
+                Build your professional CV in just 5 minutes!
+              </h1>
+
+              <div className="mt-8 flex flex-wrap  gap-4 text-center">
+                <Link
+                  to="/signup"
+                  className="block w-full rounded bg-blue-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+                  onClick={() => navigateHandler("signup")}
+                  data-aos="fade-up"
+                >
+                  Get Started
+                </Link>
+
+                <Link
+                  to="/signup"
+                  className="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-blue-600 shadow hover:text-blue-700 focus:outline-none focus:ring active:text-blue-500 sm:w-auto"
+                  data-aos="fade-up"
+                >
+                  Learn More
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      </header>
     </>
- 
-  
   );
 };
 
@@ -143,13 +131,13 @@ const MainContent = () => {
             you hired faster, with a user-friendly experience.
           </p>
 
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 steps-list">
             {/* Step 1 */}
             <div
-              className="flex flex-col items-center text-center"
+              className="steps-item flex flex-col items-center text-center"
               data-aos="fade-up"
             >
-              <div className="w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full mb-4">
+              <div className="steps-item-icon w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full mb-4">
                 <a href="/template">
                   <i className="fas fa-layer-group text-xl"></i>
                 </a>
@@ -197,8 +185,6 @@ const MainContent = () => {
     </main>
   );
 };
-
-
 
 const PricingSection = () => {
   useEffect(() => {
