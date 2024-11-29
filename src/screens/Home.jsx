@@ -76,34 +76,27 @@ const Crea8CV = () => {
           style={{ backgroundImage: `url(${bannerImage})` }}
           data-aos="fade-up"
         >
-          <div className="navbar navbar-expand-lg navbar-light absolute inset-0  bg-blue-500 sm:bg-transparent sm:from-blue-900/95 sm:to-blue-900/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
+        
+        <div className="navbar navbar-expand-lg navbar-light absolute inset-0 bg-blue-500 sm:bg-transparent sm:from-blue-900/95 sm:to-blue-900/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
 
-          <div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
-            <div className="container max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-              <h1 className="text-3xl font-extrabold text-white sm:text-5xl">
-                Build your professional CV in just 5 minutes!
-              </h1>
+<div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
+  <div className="container max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+    <h1 className="text-3xl font-extrabold text-white sm:text-5xl">
+      Build your professional CV in just 5 minutes!
+    </h1>
 
-              <div className="mt-8 flex flex-wrap  gap-4 text-center">
-                <Link
-                  to="/signup"
-                  className="block w-full rounded bg-blue-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
-                  onClick={() => navigateHandler("signup")}
-                  data-aos="fade-up"
-                >
-                  Get Started
-                </Link>
+    <div className="mt-8 flex justify-center">
+      <button
+        className="block w-full rounded bg-blue-600 px-12 py-3 text-lg font-bold text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+        onClick={() => navigateHandler("signup")}
+        data-aos="fade-up"
+      >
+        Let's get started
+      </button>
+    </div>
+  </div>
+</div>
 
-                <Link
-                  to="/signup"
-                  className="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-blue-600 shadow hover:text-blue-700 focus:outline-none focus:ring active:text-blue-500 sm:w-auto"
-                  data-aos="fade-up"
-                >
-                  Learn More
-                </Link>
-              </div>
-            </div>
-          </div>
         </section>
       </header>
     </>
