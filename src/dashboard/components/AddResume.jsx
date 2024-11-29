@@ -69,7 +69,7 @@ function AddResume() {
         cursor-pointer border-dashed"
         onClick={() => setOpenDialog(true)}
       >
-        <PlusSquare />
+        <PlusSquare  />
       </div>
 
       <Dialog open={openDialog}>

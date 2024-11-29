@@ -126,8 +126,8 @@ function Dashboard() {
           </nav>
         </div>
         <div className="mt-20 p-10 md:px-20 lg:px-32">
-          <h2 className="font-bold text-3xl">Generate CVs with AI</h2>
-          <p>Start Creating AI resume to land your next Job role</p>
+          <h2 className="text-center font-bold text-3xl">Generate CVs with AI</h2>
+          <p className="text-center">Start Creating AI resume to land your next Job role</p>
           <div
             className="grid grid-cols-2 
       md:grid-cols-3 lg:grid-cols-3 gap-10
