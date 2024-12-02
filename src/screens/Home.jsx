@@ -40,7 +40,7 @@ const Crea8CV = () => {
             </button>
             <div className="hidden lg:flex items-center space-x-6">
               <div className="relative group" data-aos="fade-left">
-                <button className="text-blue-500 font-medium">
+                <button className="text-blue-500 font-medium !bg-white">
                   Resume Templates
                 </button>
                 <div className="absolute left-0 hidden group-hover:block bg-white shadow-md py-2 mt-2">
