@@ -93,9 +93,8 @@ export const autoLogin = () => {
 
       if (response.status === 200) {
         const data = await response.json();
-        alert(200)
-        console.log(data)
         
+       
 
         dispatch({ type: REFRESH_LOGIN, payload: data });
         return {
