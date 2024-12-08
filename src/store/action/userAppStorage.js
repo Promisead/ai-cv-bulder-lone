@@ -23,6 +23,7 @@ let retrievedAdminStoredToken = () => {
 
 
   if (!expiryDate) {
+    alert('expired')
     return {
       token: "",
       expiresIn: ""
@@ -32,7 +33,7 @@ let retrievedAdminStoredToken = () => {
   const timeLeft = calculateRemainingTime(Number(expiryDate)); // Ensure expiryDate is a number
 
   if (timeLeft <= 1000) {
-
+    alert('less time')
     // Less than or equal to 1 hour
     localStorage.removeItem('token');
     localStorage.removeItem('expiry');
@@ -52,11 +53,13 @@ let retrievedAdminStoredToken = () => {
 
 // Redux async function for automatic login based on stored token
 export const autoLogin = () => {
+  
   return async (dispatch, getState) => {
     // Get the admin token and its expiry
     const { token, expiresIn } = retrievedAdminStoredToken();
 
     if (!token) {
+      
 
       return {
         bool: false,
@@ -67,6 +70,7 @@ export const autoLogin = () => {
 
     // Check if the token is still valid
     if (expiresIn <= 0) {
+      
       localStorage.removeItem("user");
       localStorage.removeItem("token");
       localStorage.removeItem("expiry");
@@ -79,7 +83,7 @@ export const autoLogin = () => {
 
     // Optionally validate the token with the server
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/validate-token`, {
+      const response = await fetch(`http://localhost:8080/validate-token`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,15 +93,18 @@ export const autoLogin = () => {
 
       if (response.status === 200) {
         const data = await response.json();
-
+        alert(200)
+        console.log(data)
+        
 
         dispatch({ type: REFRESH_LOGIN, payload: data });
         return {
           bool: true,
           message: "Successfully logged in",
-          url: `/cvs`
+          url: `/template`
         };
       } else {
+      
 
         localStorage.removeItem("user");
         localStorage.removeItem("token");
@@ -110,6 +117,7 @@ export const autoLogin = () => {
       }
 
     } catch (err) {
+      alert('error')
       return {
         bool: false,
         message: "Network error"
@@ -118,12 +126,12 @@ export const autoLogin = () => {
   }
 }
 
+
 /*   user sections */
 export const signup = (data) => {
-
   return async (dispatch, getState) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/signup`, {
+      const response = await fetch(`http://localhost:8080/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -133,6 +141,7 @@ export const signup = (data) => {
       const responseData = await response.json();
 
       if (response.status === 404 || response.status === 300) {
+       
         return {
           bool: false,
           message: responseData.response,
@@ -141,6 +150,7 @@ export const signup = (data) => {
       }
 
       if (response.status === 301) {
+        
         return {
           bool: false,
           message: responseData.response,
@@ -149,6 +159,7 @@ export const signup = (data) => {
       }
 
       if (response.status === 200) {
+    
         localStorage.setItem("user", JSON.stringify(responseData.user));
         localStorage.setItem("token", responseData.userToken); // Store directly as a string
         localStorage.setItem("expiry", responseData.userExpiresIn.toString()); // Store expiry as string
@@ -158,7 +169,9 @@ export const signup = (data) => {
           userToken: responseData.userToken,
           userExpiresIn: responseData.userExpiresIn
         };
+        console.log( payloadData )
         dispatch({ type: LOGIN_USER, payload: payloadData });
+      
 
         return {
           bool: true,
@@ -167,6 +180,7 @@ export const signup = (data) => {
         };
       }
     } catch (err) {
+      console.log(err)
       return {
         bool: false,
         message: "Network error",
@@ -181,7 +195,7 @@ export const login = (data) => {
     let userData = data;
     // Do some check on the server if it's actually login before proceeding to dispatch
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/login`, {
+      const response = await fetch(`http://localhost:8080/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -226,7 +240,7 @@ export const makeCv = (data) => {
     try {
       const { userAuth } = getState();
       // Access specific slice of the state
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/makecv/${userAuth.user._id}`, {
+      const response = await fetch(`http://localhost:8080/makecv/${userAuth.user._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -276,7 +290,7 @@ export const updateCv = (data) => {
   return async (dispatch, getState) => {
     try {
       const { userAuth } = getState(); // Access user authentication data
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/updatecv/${userAuth.user._id}`, {
+      const response = await fetch(`http://localhost:8080/updatecv/${userAuth.user._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -326,11 +340,13 @@ export const updateCv = (data) => {
   };
 }
 
+//meta78.env.VITE_process.env.REACT_APP_API_BASE_URL2
+
 export const deleteCv = (data) => {
   return async (dispatch, getState) => {
     try {
       const { userAuth } = getState(); // Access user authentication data
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/deletecv/${userAuth.user._id}`, {
+      const response = await fetch(`http://localhost:8080/deletecv/${userAuth.user._id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
@@ -383,7 +399,7 @@ export const fetchCv = (id) => {
   return async (dispatch, getState) => {
     //do some check on the server if its actually login before proceding to dispatch
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/cvs/${id}`)
+      const response = await fetch(`http://localhost:8080/cvs/${id}`)
       if (response.status === 404) {
         let data = await response.json()
         return {
@@ -427,7 +443,7 @@ export const openCv = (data) => {
 export const updateUser = (data) => {
   return async (dispatch, getState) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/updateaccount/${data._id}`, {
+      const response = await fetch(`http://localhost:8080/updateaccount/${data._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -471,6 +487,78 @@ export const updateUser = (data) => {
   }
 
 }
+
+//payment functions
+export const initiatePlan = (data) => {
+  alert('test')
+  return async (dispatch, getState) => {
+    try {
+      const response = await fetch('http://localhost:8080/initiateplan', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+
+      if (response.status === 404) {
+        let data = await response.json()
+        return {
+          bool: false,
+          message: data.response,
+        }
+      }
+      if (response.status === 300) {
+        let data = await response.json()
+        return {
+          bool: false,
+          message: data.response,
+        }
+      }
+
+      if (response.status === 200) {
+        let res = await response.json()
+
+        if (res.data.authorization_url) {
+          // Redirect the user to the authorization URL to complete the payment
+          window.location.href = res.data.authorization_url;
+        } else {
+          console.error('Failed to create authorization URL');
+        }
+
+        return {
+          bool: true,
+        }
+      }
+    } catch (err) {
+      console.log(err)
+      return {
+        bool: false,
+        message: "network error",
+      }
+
+    }
+
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export const logout = () => {

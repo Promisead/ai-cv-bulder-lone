@@ -18,9 +18,16 @@ const Dashboard = () => {
   let dispatch = useDispatch();
 
   useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
+    setTimeout(() => {
+      setIsLoading(true)
+      if (!user) {
+        console.log(user)
+        navigate('/login');
+      }
+      setIsLoading(false)
+      
+    }, 100000);
+    
   }, [user, navigate]);
 
   const handleLogout = async () => {

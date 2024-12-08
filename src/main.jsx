@@ -27,7 +27,7 @@ import Form from "./screens/CvForm.jsx"
 
 import LoginPage from "./screens/Login.jsx";
 import SignupPage from "./screens/Signup.jsx";
-
+import SubscriptionPlan from "./screens/Subscription.jsx";
 
 
 //configuring redux store
@@ -43,6 +43,8 @@ import { Help } from "@mui/icons-material";
 const rootReducer = combineReducers({
   userAuth: userAuthReducer,
 });
+
+
 
 
 //creating store
@@ -92,6 +94,11 @@ const router = createBrowserRouter([
         path: "/profilesetting",
         element: <ProfileSettings/>,
       },
+      {
+        path: "/subscription/:id",
+        element: <SubscriptionPlan/>,
+      },
+    
       {
         path: "/pricing",
         element: <PricingPlan/>,

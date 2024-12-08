@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-//import { Container, Row, Col, Nav, Navbar, Button } from 'react-bootstrap';
-import { FaUserCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal/Modal'; // Ensure correct import path
 import Loader from "../components/loader"; // Ensure correct import path
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/action/userAppStorage';
 
+
+//code to check if user is already subscribe
 
 
 const PricingPlan = () => {
@@ -37,6 +37,10 @@ const PricingPlan = () => {
         navigate(path);
     };
 
+    const navigateHandler =(id)=>{
+        navigate(`/subscription/${id}`)
+    }
+
     //const dashboardUrl = "https://crea8cv-v3.vercel.app";
 
     const renderContent = () => (
@@ -52,7 +56,7 @@ const PricingPlan = () => {
                 <h5 className="text-2xl font-semibold text-gray-800 mb-4">{plan.title}</h5>
                 <h6 className="text-lg text-gray-500 mb-4 font-semibold">{plan.price}</h6>
                 <p className="text-gray-600 mb-6">{plan.description}</p>
-                <button className={`${plan.btnColor} text-white px-6 py-3 rounded-full font-semibold`}>
+                <button className={`${plan.btnColor} text-white px-6 py-3 rounded-full font-semibold`} onClick={()=>navigateHandler(plan.title)}>
                   Choose Plan
                 </button>
               </div>
