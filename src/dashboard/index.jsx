@@ -43,7 +43,7 @@ function Dashboard() {
   };
   return (
     <>
-      <div className="flex mt-20 min-h-screen bg-gray-50">
+      <div className="flex mt-0 min-h-screen bg-gray-50">
         {/* Sidebar */}
         <div
           className={`w-64 min-h-screen bg-blue-800 text-white ${
@@ -135,7 +135,7 @@ function Dashboard() {
       "
           >
             <AddResume />
-            {resumeList.length > 0
+            {resumeList?.length > 0
               ? resumeList.map((resume, index) => (
                   <ResumeCardItem
                     resume={resume}

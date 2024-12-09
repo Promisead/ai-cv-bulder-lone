@@ -186,7 +186,6 @@ const ProfileSettings = () => {
             {isError && <Modal content={isErrorInfo} closeModal={() => setIsError(false)} />} {/* Modal for Error */}
             <div className="mt-0 flex min-h-screen bg-gray-50">
                 {/* Sidebar */}
-                {/* Sidebar */}
                 <div className={`w-64 min-h-screen bg-blue-800 text-white ${sidebarOpen ? 'block' : 'hidden'} sm:block`}>
                     <div className="flex justify-between items-center p-4 border-b border-blue-900">
                         <h4 className="text-xl font-semibold text-center">Dashboard</h4>
