@@ -78,51 +78,51 @@ const AppWrapper = () => {
       element: <Home />,
     },
     {
+      path: "/cvs",
+      element:user?<Cvs/>:<LoginPage/>,
+    },
+    {
+      path: "/dashboard/resume/:resumeId/edit",
+      element:user?<EditResume />:<LoginPage/>,
+    },
+    {
+      path: "/editcv/:id",
+      element: user?<EditCV/>:<LoginPage/>,
+    },
+    {
+      path: "/form/:id",
+      element: user?<Form/>:<LoginPage/>,
+    },
+    {
+      path: "/preview/:id/:cv",
+      element:  user?<Preview/>:<LoginPage/>,
+    },
+    {
+      path: "/profilesetting",
+      element:   user?<ProfileSettings/>:<LoginPage/>,
+    },
+    {
+      path: "/subscription/:id",
+      element:   user?<SubscriptionPlan/>:<LoginPage/>,
+    },
+    {
+      path: "/preview/:id",
+      element:  user?<Preview/> :<LoginPage/>,
+    },
+    {
+      path: "/pricing",
+      element:  user?<PricingPlan/>:<LoginPage/>,
+    },
+    {
+      path: "/template",
+      element:  user?<Template/>:<LoginPage/>,
+    },
+    {
       element: <App />,
       children: [
         {
           path: "/ai",
           element: <Dashboard />,
-        },
-        {
-          path: "/dashboard/resume/:resumeId/edit",
-          element:user?<EditResume />:<LoginPage/>,
-        },
-        {
-          path: "/cvs",
-          element:user?<Cvs/>:<LoginPage/>,
-        },
-        {
-          path: "/editcv/:id",
-          element: user?<EditCV/>:<LoginPage/>,
-        },
-        {
-          path: "/form/:id",
-          element: user?<Form/>:<LoginPage/>,
-        },
-        {
-          path: "/preview/:id",
-          element:  user?<Preview/> :<LoginPage/>,
-        },
-        {
-          path: "/preview/:id/:cv",
-          element:  user?<Preview/>:<LoginPage/>,
-        },
-        {
-          path: "/profilesetting",
-          element:   user?<ProfileSettings/>:<LoginPage/>,
-        },
-        {
-          path: "/subscription/:id",
-          element:   user?<SubscriptionPlan/>:<LoginPage/>,
-        },
-        {
-          path: "/pricing",
-          element:  user?<PricingPlan/>:<LoginPage/>,
-        },
-        {
-          path: "/template",
-          element:  user?<Template/>:<LoginPage/>,
         },
       ],
     },

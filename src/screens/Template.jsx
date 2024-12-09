@@ -49,14 +49,14 @@ const Dashboard = () => {
       window.removeEventListener("resize", updateItemsPerPage);
     };
   }, []);
- // Update the templates to use imported images
- const templates = [
-  { src: cv1, alt: "CV Template 1", id: "template1" },
-  { src: cv2, alt: "CV Template 2", id: "template2" },
-  { src: cv3, alt: "CV Template 3", id: "template3" },
-  { src: cv4, alt: "CV Template 4", id: "template4" },
-  { src: cv5, alt: "CV Template 5", id: "template5" },
-];
+  // Update the templates to use imported images
+  const templates = [
+    { src: cv1, alt: "CV Template 1", id: "template1" },
+    { src: cv2, alt: "CV Template 2", id: "template2" },
+    { src: cv3, alt: "CV Template 3", id: "template3" },
+    { src: cv4, alt: "CV Template 4", id: "template4" },
+    { src: cv5, alt: "CV Template 5", id: "template5" },
+  ];
 
   const totalPages = Math.ceil(templates.length / itemsPerPage);
 
@@ -82,14 +82,11 @@ const Dashboard = () => {
       {isError && (
         <Modal content={isErrorInfo} closeModal={() => setIsError(false)} />
       )}
-      <div className="mt-20 flex min-h-screen bg-gray-50">
+      <div className="mt-0 flex min-h-screen bg-gray-50">
         {/* Sidebar */}
-        <div
-          className={` w-64 min-h-screen bg-blue-800 text-white ${
-            sidebarOpen ? "block" : "hidden"
-          } sm:block`}
-        >
-          <div className="flex justify-between items-center p-6 border-b border-blue-900">
+        <div className={`w-64 min-h-screen bg-blue-800 text-white ${sidebarOpen ? 'block' : 'hidden'} sm:block`}>
+          <div className="flex justify-between items-center p-4 border-b border-blue-900">
+            <h4 className="text-xl font-semibold text-center">Dashboard</h4>
             <button
               className="text-white sm:hidden"
               onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -98,15 +95,9 @@ const Dashboard = () => {
             </button>
           </div>
           <nav className="flex flex-col px-4 py-6">
-           
             <button
-              onClick={() => {
-                setActiveTab("myCVs");
-                navigate("/cvs");
-              }}
-              className={`text-white py-3 px-4 rounded-md ${
-                activeTab === "myCVs" ? "bg-blue-700" : "hover:bg-blue-700"
-              } mb-2`}
+              onClick={() => { setActiveTab('myCVs'); navigate('/cvs'); }}
+              className={`text-white py-3 px-4 rounded-md ${activeTab === 'myCVs' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
             >
               My CVs
             </button>
@@ -116,44 +107,25 @@ const Dashboard = () => {
                 setActiveTab("ai");
                 navigate("/ai");
               }}
-              className={`text-white py-3 px-4 rounded-md ${
-                activeTab === "ai" ? "bg-blue-700" : "hover:bg-blue-700"
-              } mb-2`}
+              className="text-white py-3 px-4 rounded-md hover:bg-blue-700 mb-2"
             >
-              Crea8 with AI
+              Create with AI
             </button>
             <button
-              onClick={() => {
-                setActiveTab("templates");
-                navigate("/template");
-              }}
-              className={`text-white py-3 px-4 rounded-md ${
-                activeTab === "templates" ? "bg-blue-700" : "hover:bg-blue-700"
-              } mb-2`}
+              onClick={() => { setActiveTab('templates'); navigate('/template'); }}
+              className={`text-white py-3 px-4 rounded-md ${activeTab === 'templates' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
             >
               Templates
             </button>
             <button
-              onClick={() => {
-                setActiveTab("profileSettings");
-                navigate("/profilesetting");
-              }}
-              className={`text-white py-3 px-4 rounded-md ${
-                activeTab === "profileSettings"
-                  ? "bg-blue-700"
-                  : "hover:bg-blue-700"
-              } mb-2`}
+              onClick={() => { setActiveTab('profileSettings'); navigate('/profilesetting'); }}
+              className={`text-white py-3 px-4 rounded-md ${activeTab === 'profileSettings' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
             >
               Profile Settings
             </button>
             <button
-              onClick={() => {
-                setActiveTab("pricing");
-                navigate("/pricing");
-              }}
-              className={`text-white py-3 px-4 rounded-md ${
-                activeTab === "pricing" ? "bg-blue-700" : "hover:bg-blue-700"
-              } mb-2`}
+              onClick={() => { setActiveTab('pricing'); navigate('/pricing'); }}
+              className={`text-white py-3 px-4 rounded-md ${activeTab === 'pricing' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
             >
               Pricing Plans
             </button>
@@ -166,20 +138,18 @@ const Dashboard = () => {
           </nav>
         </div>
 
+
         {/* Main Content */}
-        <div className=" flex-1 pt-0">
-          <div className="flex justify-between items-center mb-6 bg-white shadow-lg p-4">
-            <div
-              className="flex items-center space-x-6"
-              style={{ width: "100%", padding: "15px" }}
-            >
-             {/*  <FaUserCircle size={35} className="text-blue-600" />
+        <div className="flex-1">
+          <div className="flex justify-between items-center bg-white shadow-lg p-4">
+            <div className="flex items-center space-x-6 w-full px-4">
+              <FaUserCircle size={35} className="text-blue-600" />
               <button
                 onClick={handleLogout}
                 className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-200"
               >
                 Logout
-              </button> */}
+              </button>
             </div>
             <button
               className="sm:hidden text-white bg-blue-600 py-2 px-4 rounded-lg hover:bg-blue-700"
@@ -191,9 +161,7 @@ const Dashboard = () => {
 
           <section className="templates-section p-6 bg-gray-50">
             <p className="intro-text text-lg md:text-xl text-gray-700 font-medium text-center mb-6">
-              A great job application leads to a good interview. An amazing
-              resume is what makes it all possible. Here are the Best Templates
-              for you to choose from.
+              A great job application leads to a good interview. An amazing resume is what makes it all possible. Here are the Best Templates for you to choose from.
             </p>
             <div className="pagination flex justify-center gap-4 mb-6">
               <button
@@ -213,10 +181,7 @@ const Dashboard = () => {
             </div>
             <div className="templates-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {templates
-                .slice(
-                  currentPage * itemsPerPage,
-                  (currentPage + 1) * itemsPerPage
-                )
+                .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
                 .map((template) => (
                   <div
                     key={template.id}
@@ -236,6 +201,7 @@ const Dashboard = () => {
             </div>
           </section>
         </div>
+
       </div>
     </>
   );

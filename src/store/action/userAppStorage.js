@@ -540,9 +540,7 @@ export const initiatePlan = (data) => {
         bool: false,
         message: "network error",
       }
-
     }
-
   }
 
 }
