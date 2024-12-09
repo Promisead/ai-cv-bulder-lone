@@ -1,99 +1,95 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Modal from '../components/Modal/Modal'; // Ensure correct import path
-import Loader from "../components/loader"; // Ensure correct import path
+import Modal from '../components/Modal/Modal';
+import Loader from "../components/loader";
 import { useEffect } from 'react';
-import { initiatePlan } from '@/store/action/userAppStorage';
+import { VerifySubscription, initiatePlan } from '@/store/action/userAppStorage';
 
 
 const CreatePlan = () => {
   const [name, setName] = useState('');
   const [interval, setInterval] = useState('monthly');
-  const [amount, setAmount] = useState('10');
+  const [amount, setAmount] = useState('1000');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isErrorInfo, setIsErrorInfo] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isReference, setIsReference] = useState('')
   const { user } = useSelector(state => state.userAuth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // Assuming the user is redirected back to your site after completing the payment
+  
+
+  const reference = localStorage.getItem('payment_reference');
   
 
 
+  const checkUserIsBack = async () => {
+    setIsLoading(true)
+    let response = await dispatch(VerifySubscription(reference))
 
-  // Assuming the user is redirected back to your site after completing the payment
-const urlParams = new URLSearchParams(window.location.search);
-const reference = urlParams.get('reference');
-
-
-
-
-
-
-useEffect(()=>{
-    checkUserIsBack()
-})
-
-let checkUserIsBack = async()=>{
-    if (reference) {
-        // Call your backend to verify the payment
-        fetch(`/verify-payment/${reference}`)
-           .then(response => response.json())
-           .then(data => {
-              if (data.status === 'success') {
-                 alert('Payment was successful!');
-              } else {
-                 alert('Payment verification failed.');
-              }
-           })
-           .catch(error => {
-              console.error('Error:', error);
-           });
-     } else {
-        console.log('No reference found in the URL.');
-     }}
-
-
-
-
-  useEffect(() => {
-    if (!user) {
-        navigate('/login'); 
+    if (!response.bool) {
+      /// do something
+      setIsLoading(false)
+      setIsError(true)
+      setIsErrorInfo(response.message)
+      return localStorage.removeItem('payment_reference');
     }
-}, [user, navigate]);
+    setIsLoading(false)
+    setIsError(true)
+    setIsErrorInfo(response.message)
+    localStorage.removeItem('payment_reference');
 
+    //navigate to plan page
+    setTimeout(() => {
+      navigate('/pricing')
+    }, 5000);
 
-  const { id } = useParams(); 
+  }
+
 
 
   useEffect(() => {
+    if (reference) {
+      checkUserIsBack()
+    }
+  }, [])
+
+
+
+  const { id } = useParams();
+  useEffect(() => {
     if (!user) {
-        return navigate('/login'); // Redirect to login page if user is not found
+      return navigate('/login'); // Redirect to login page if user is not found
     }
     setName(id)
-}, [user, navigate]);
+  }, [user, navigate]);
 
 
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     setIsLoading(true);
     // Mock submitting the form, you would call your Redux action or API here
     let response = await dispatch(initiatePlan({
-        email:'arierhiprecious@gmail.com',
-        plan:'PLN_eoadawpomssgue7',
-       
-    }))
+      email: 'arierhiprecious@gmail.com',
+      plan: 'PLN_eoadawpomssgue7',
+      amount:amount,
+      subscriptionType:name
+    }));
 
     if (!response.bool) {
-        setIsLoading(false)
-        setIsError(true)
-        setIsErrorInfo(response.message)
-        return
+      setIsLoading(false);
+      setIsError(true);
+      setIsErrorInfo(response.message);
+      return;
     }
+
+   
   };
+
 
 
 
@@ -193,7 +189,7 @@ let checkUserIsBack = async()=>{
                 />
               </div>
 
-             
+
 
               <div className="mb-4">
                 <label htmlFor="amount" className="block text-sm font-semibold text-gray-600">Amount to Charge</label>

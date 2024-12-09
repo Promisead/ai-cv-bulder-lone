@@ -20,14 +20,6 @@ function App() {
 
 
   
-  //const {user,isLoaded,isSignedIn}=useUser();
-
-  /*  if(!user)
-  {
-    return <Navigate to={'/Login'} />
-  }  */
-
-  
 
   return (
     <>

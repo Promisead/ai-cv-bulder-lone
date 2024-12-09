@@ -11,6 +11,7 @@ const initialState = {
     cvs: []
 }
 
+
 export const userAuthReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGOUT:
@@ -29,6 +30,7 @@ export const userAuthReducer = (state = initialState, action) => {
             }
 
         case REFRESH_LOGIN:
+           
             return {
                 ...state,
                 user: action.payload.user,

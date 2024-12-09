@@ -23,7 +23,6 @@ let retrievedAdminStoredToken = () => {
 
 
   if (!expiryDate) {
-    alert('expired')
     return {
       token: "",
       expiresIn: ""
@@ -33,7 +32,6 @@ let retrievedAdminStoredToken = () => {
   const timeLeft = calculateRemainingTime(Number(expiryDate)); // Ensure expiryDate is a number
 
   if (timeLeft <= 1000) {
-    alert('less time')
     // Less than or equal to 1 hour
     localStorage.removeItem('token');
     localStorage.removeItem('expiry');
@@ -53,14 +51,11 @@ let retrievedAdminStoredToken = () => {
 
 // Redux async function for automatic login based on stored token
 export const autoLogin = () => {
-  
   return async (dispatch, getState) => {
     // Get the admin token and its expiry
     const { token, expiresIn } = retrievedAdminStoredToken();
 
     if (!token) {
-      
-
       return {
         bool: false,
         message: "No valid session found",
@@ -70,7 +65,7 @@ export const autoLogin = () => {
 
     // Check if the token is still valid
     if (expiresIn <= 0) {
-      
+
       localStorage.removeItem("user");
       localStorage.removeItem("token");
       localStorage.removeItem("expiry");
@@ -93,8 +88,8 @@ export const autoLogin = () => {
 
       if (response.status === 200) {
         const data = await response.json();
-        
-       
+
+        console.log(data)
 
         dispatch({ type: REFRESH_LOGIN, payload: data });
         return {
@@ -103,7 +98,7 @@ export const autoLogin = () => {
           url: `/template`
         };
       } else {
-      
+
 
         localStorage.removeItem("user");
         localStorage.removeItem("token");
@@ -116,7 +111,6 @@ export const autoLogin = () => {
       }
 
     } catch (err) {
-      alert('error')
       return {
         bool: false,
         message: "Network error"
@@ -140,7 +134,7 @@ export const signup = (data) => {
       const responseData = await response.json();
 
       if (response.status === 404 || response.status === 300) {
-       
+
         return {
           bool: false,
           message: responseData.response,
@@ -149,7 +143,7 @@ export const signup = (data) => {
       }
 
       if (response.status === 301) {
-        
+
         return {
           bool: false,
           message: responseData.response,
@@ -158,7 +152,7 @@ export const signup = (data) => {
       }
 
       if (response.status === 200) {
-    
+
         localStorage.setItem("user", JSON.stringify(responseData.user));
         localStorage.setItem("token", responseData.userToken); // Store directly as a string
         localStorage.setItem("expiry", responseData.userExpiresIn.toString()); // Store expiry as string
@@ -168,9 +162,9 @@ export const signup = (data) => {
           userToken: responseData.userToken,
           userExpiresIn: responseData.userExpiresIn
         };
-        console.log( payloadData )
+        console.log(payloadData)
         dispatch({ type: LOGIN_USER, payload: payloadData });
-      
+
 
         return {
           bool: true,
@@ -489,7 +483,7 @@ export const updateUser = (data) => {
 
 //payment functions
 export const initiatePlan = (data) => {
-  alert('test')
+
   return async (dispatch, getState) => {
     try {
       const response = await fetch('http://localhost:8080/initiateplan', {
@@ -504,7 +498,7 @@ export const initiatePlan = (data) => {
         let data = await response.json()
         return {
           bool: false,
-          message: data.response,
+          message: data.message,
         }
       }
       if (response.status === 300) {
@@ -518,6 +512,9 @@ export const initiatePlan = (data) => {
       if (response.status === 200) {
         let res = await response.json()
 
+        // Save the reference code to localStorage
+        localStorage.setItem('payment_reference', res.data.reference);
+        // Optionally update the local state if you need to show it in the UI
         if (res.data.authorization_url) {
           // Redirect the user to the authorization URL to complete the payment
           window.location.href = res.data.authorization_url;
@@ -525,8 +522,16 @@ export const initiatePlan = (data) => {
           console.error('Failed to create authorization URL');
         }
 
+        //dispatching subcription token
+        dispatch({ type: UPDATE_USER, payload: res.user })
+
         return {
           bool: true,
+          message: {
+            acessCode: res.data.access_code,
+            reference: res.data.reference
+
+          }
         }
       }
     } catch (err) {
@@ -541,6 +546,64 @@ export const initiatePlan = (data) => {
   }
 
 }
+
+
+export const VerifySubscription = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await fetch(`http://localhost:8080/verify-payment/${data}`, {
+        method: 'GET',  
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 400) {
+        let data = await response.json()
+        return {
+          bool: false,
+          message: data.message,
+        }
+      }
+
+      if (response.status === 404) {
+        let data = await response.json()
+        return {
+          bool: false,
+          message: data.message,
+        }
+      }
+      if (response.status === 300) {
+        let data = await response.json()
+        return {
+          bool: false,
+          message: data.message,
+        }
+      }
+
+      if (response.status === 200) {
+        let data = await response.json()
+
+        return {
+          bool: true,
+          message: data.message
+        }
+      }
+    } catch (err) {
+      console.log(err)
+      return {
+        bool: false,
+        message: "network error",
+      }
+
+    }
+
+  }
+
+}
+
+
+
 
 
 

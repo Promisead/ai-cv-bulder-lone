@@ -5,22 +5,18 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {logout} from "../../store/action/userAppStorage"
+import {autoLogin, logout} from "../../store/action/userAppStorage"
 
 
 function Header() {
-  //const { user, isSignedIn } = useUser();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const dispatch = useDispatch();
-  let { user } = useSelector((state) => state.userAuth);
-  console.log(user)
+  let { user } = useSelector(state => state.userAuth);
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/Login'); // Redirect to login page if user is not found
-    }
-  }, [user, navigate]);
+
+
 
   const handleLogout = async () => {
     await dispatch( logout())

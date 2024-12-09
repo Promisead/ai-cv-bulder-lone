@@ -15,7 +15,6 @@ import Dashboard from "./dashboard/index.jsx";
 //import { ClerkProvider, SignIn } from "@clerk/clerk-react";
 import EditResume from "./dashboard/resume/[resumeId]/edit/index.jsx";
 import ViewResume from "./my-resume/[resumeId]/view/index.jsx";
-
 import ProfileSettings from "./screens/ProfileSetting.jsx";
 import Cvs from  "./screens/CVS"
 import PricingPlan from "./screens/Pricing.jsx";
@@ -41,7 +40,6 @@ import { combineReducers, createStore, applyMiddleware } from "redux";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { userAuthReducer } from "./store/reducer/userAppStorage";
 import { Help } from "@mui/icons-material";
-
 //import ErrorBoundary from "./screens/Error/Error"
 //configuring the redux store
 const rootReducer = combineReducers({
@@ -61,29 +59,20 @@ const apiUrl = import.meta.env.VITE_BASE_URL2;
 
 // Custom wrapper to handle dispatch on initialization
 const AppWrapper = () => {
-  const dispatch = useDispatch();
-
+ 
   let { user } = useSelector(state => state.userAuth);
-
+  let dispatch = useDispatch()
+  
   useEffect(() => {
     const checkAutoLogin = async () => {
-      const result = await dispatch(autoLogin());
-      if (!result.bool) {
-        // Redirects to "/login" if not logged in
-
-      }else{
-        alert('successful')
-        console.log(user)
-      }
-
+       await dispatch(autoLogin());
     };
     checkAutoLogin();
-  }, []);
-
-
+    
+  }, [dispatch]);
+ 
 
   const router = createBrowserRouter([
-  
     {
       path: "/",
       element: <Home />,
@@ -97,44 +86,43 @@ const AppWrapper = () => {
         },
         {
           path: "/dashboard/resume/:resumeId/edit",
-          element: <EditResume />,
+          element:user?<EditResume />:<LoginPage/>,
         },
         {
           path: "/cvs",
-          element: user?<Cvs/>:< LoginPage />,
+          element:user?<Cvs/>:<LoginPage/>,
         },
         {
           path: "/editcv/:id",
-          element: <EditCV/>,
+          element: user?<EditCV/>:<LoginPage/>,
         },
         {
           path: "/form/:id",
-          element: <Form/>,
+          element: user?<Form/>:<LoginPage/>,
         },
         {
           path: "/preview/:id",
-          element: <Preview/>,
+          element:  user?<Preview/> :<LoginPage/>,
         },
         {
           path: "/preview/:id/:cv",
-          element: <Preview/>,
+          element:  user?<Preview/>:<LoginPage/>,
         },
         {
           path: "/profilesetting",
-          element: <ProfileSettings/>,
+          element:   user?<ProfileSettings/>:<LoginPage/>,
         },
         {
           path: "/subscription/:id",
-          element: <SubscriptionPlan/>,
+          element:   user?<SubscriptionPlan/>:<LoginPage/>,
         },
-      
         {
           path: "/pricing",
-          element: <PricingPlan/>,
+          element:  user?<PricingPlan/>:<LoginPage/>,
         },
         {
           path: "/template",
-          element: <Template/>,
+          element:  user?<Template/>:<LoginPage/>,
         },
       ],
     },

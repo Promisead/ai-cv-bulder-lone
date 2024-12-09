@@ -6,22 +6,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/action/userAppStorage';
 
 
-//code to check if user is already subscribe
+
 
 
 const PricingPlan = () => {
     const [activeTab, setActiveTab] = useState('pricing');
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(false); // Loader state
-    const [isError, setIsError] = useState(false); // Error state
-    const [isErrorInfo, setIsErrorInfo] = useState(''); // Error message state
+    const [isLoading, setIsLoading] = useState(false); 
+    const [isError, setIsError] = useState(false); 
+    const [isErrorInfo, setIsErrorInfo] = useState(''); 
     const navigate = useNavigate();
-    const { user } = useSelector(state => state.userAuth); // Fetch user from Redux store
+    const { user } = useSelector(state => state.userAuth); 
     let dispatch = useDispatch()
 
     useEffect(() => {
         if (!user) {
             navigate('/login'); // Redirect to login page if user is not found
+        }
+        if(user.paymentPlan){
+            setIsError(true)
+            setIsErrorInfo(`your current plan is ${user.paymentPlan}`)
         }
     }, [user, navigate]);
 
@@ -41,7 +45,6 @@ const PricingPlan = () => {
         navigate(`/subscription/${id}`)
     }
 
-    //const dashboardUrl = "https://crea8cv-v3.vercel.app";
 
     const renderContent = () => (
         <main className="bg-gray-100 p-8 rounded-lg">
@@ -52,7 +55,7 @@ const PricingPlan = () => {
               { title: 'Standard', price: '$20/month', description: 'Ideal for small teams with extra features.', btnColor: 'bg-green-500 hover:bg-green-700' },
               { title: 'Premium', price: '$30/month', description: 'Best for larger organizations.', btnColor: 'bg-yellow-500 hover:bg-yellow-700' },
             ].map((plan, index) => (
-              <div className="bg-white p-6 rounded-xl shadow-lg text-center" key={index}>
+              <div className="bg-white p-6 rounded-xl shadow-lg text-center" key={index} style={{backgroundColor:'rgb(244,244,244)'}}>
                 <h5 className="text-2xl font-semibold text-gray-800 mb-4">{plan.title}</h5>
                 <h6 className="text-lg text-gray-500 mb-4 font-semibold">{plan.price}</h6>
                 <p className="text-gray-600 mb-6">{plan.description}</p>
