@@ -150,66 +150,19 @@ const ProfileSettings = () => {
                       placeholder="Enter new password"
                     />
                   </div>
-      
-                  {/* Payment Information Section */}
+
                   <div>
-                    <div>
-                      <label htmlFor="formCardNumber" className="text-gray-600 font-medium">
-                        Card Number
-                      </label>
-                      <input
-                        type="text"
-                        id="formCardNumber"
-                        name="cardNumber"
-                        value={isUser.cardNumber}
-                        onChange={handleChange}
-                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Enter your card number"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="formExpiryDate" className="text-gray-600 font-medium">
-                        Expiry Date
-                      </label>
-                      <input
-                        type="text"
-                        id="formExpiryDate"
-                        name="expiryDate"
-                        value={isUser.expiryDate}
-                        onChange={handleChange}
-                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="MM/YY"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="formCVV" className="text-gray-600 font-medium">
-                        CVV
-                      </label>
-                      <input
-                        type="text"
-                        id="formCVV"
-                        name="cvv"
-                        value={isUser.cvv}
-                        onChange={handleChange}
-                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="CVV"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="formBillingAddress" className="text-gray-600 font-medium">
-                        Billing Address
-                      </label>
-                      <input
-                        type="text"
-                        id="formBillingAddress"
-                        name="billingAddress"
-                        value={isUser.billingAddress}
-                        onChange={handleChange}
-                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Enter your billing address"
-                      />
-                    </div>
+                    <label htmlFor="formPassword" className="text-gray-600 font-medium">
+                      Subscription plan
+                    </label>
+                    <input
+                      name="password"
+                      value={user.paymentPlan}
+                      className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Enter new password"
+                    />
                   </div>
+    
       
                   {/* Save Button */}
                   <button
