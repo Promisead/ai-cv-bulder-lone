@@ -49,9 +49,10 @@ const Dashboard = () => {
     }
   };
 
-  const navigateHandler = async (cv) => {
-    await dispatch(openCv(cv));
+  const navigateHandler =(cv) => {
+    dispatch(openCv(cv));
     navigate(`/preview/${cv.cvTemplateType}`);
+   
   };
 
   useEffect(() => {
@@ -80,7 +81,7 @@ const Dashboard = () => {
     }
 
     return userCVs.map((cv) => (
-      <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-6" key={cv.id}>
+      <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 mb-6" key={cv._id}>
         <div className="bg-white shadow-xl rounded-lg overflow-hidden transition transform hover:scale-105">
           <div className="p-6">
             <FaFileAlt size={40} className="text-primary mb-3" />
@@ -101,7 +102,7 @@ const Dashboard = () => {
       {isError && <Modal content={isErrorInfo} closeModal={() => setIsError(false)} />}
       <div className="flex mt-0 min-h-screen bg-gray-50">
         {/* Sidebar */}
-        <div className={`w-64 min-h-screen bg-blue-800 text-white ${sidebarOpen ? 'block' : 'hidden'} sm:block`}>
+        <div className={`sm:w-70  min-h-screen bg-blue-800 text-white ${sidebarOpen ? 'block' : 'hidden'} sm:block`}>
           <div className="flex justify-between items-center p-4 border-b border-blue-900">
             <h4 className="text-xl font-semibold text-center">Dashboard</h4>
             <button className="text-white sm:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>☰</button>
@@ -147,7 +148,7 @@ const Dashboard = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1">
+        <div className="flex-1 sm:px-4">
 
             <div className="flex justify-between items-center bg-white shadow-lg p-4">
               <div className="flex items-center space-x-6 w-full px-4">
@@ -166,7 +167,7 @@ const Dashboard = () => {
                 ☰
               </button>
             </div>
-            <div className="content">
+            <div className="content  ">
               <h2 className="pt-5 p-3 text-2xl font-semibold py-8 text-gray-800 mb-6">Created CVs</h2>
               <div className="flex flex-wrap gap-6">{renderCVs()}</div>
             </div>

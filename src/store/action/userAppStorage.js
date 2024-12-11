@@ -430,8 +430,44 @@ export const openCv = (data) => {
   return async (dispatch, getState) => {
     dispatch({ type: OPEN_CV, payload: data })
   }
-
 }
+export const fetchSpecificCv = (id) => {
+  return async (dispatch, getState) => {
+    //do some check on the server if its actually login before proceding to dispatch
+    try {
+      const response = await fetch(`http://localhost:8080/cv/${id}`)
+      if (response.status === 404) {
+        let data = await response.json()
+        return {
+          bool: false,
+          message: data.response,
+        }
+      }
+      if (response.status === 300) {
+        let data = await response.json()
+        return {
+          bool: false,
+          message: data.response,
+        }
+      }
+      if (response.status === 200) {
+        let data = await response.json()
+
+        return {
+          bool: true,
+          message: data.cv,
+        }
+      }
+
+    } catch (err) {
+      return {
+        bool: false,
+        message: "network error"
+      }
+    }
+  }
+}
+
 
 export const updateUser = (data) => {
   return async (dispatch, getState) => {

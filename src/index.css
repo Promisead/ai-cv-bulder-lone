@@ -237,6 +237,14 @@ code {
 .header-banner {
   padding: 50px 20px;
 }
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: #f0f0f0; /* Optional: background color */
+}
+
 
 @media (max-width: 768px) {
   .header-banner h1 {

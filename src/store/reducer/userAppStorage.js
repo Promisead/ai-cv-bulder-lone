@@ -54,7 +54,6 @@ export const userAuthReducer = (state = initialState, action) => {
             }
 
         case FETCH_CVS:
-            console.log(action.payload)
             return {
                 ...state,
                 cvs: action.payload,

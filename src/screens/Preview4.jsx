@@ -63,7 +63,7 @@ const Preview4 = () => {
             ),
 
             new Paragraph("SKILLS"),
-            new Paragraph(formData?.skills3 ? formData.skills3.join(", ") : "Skills not provided"),
+            new Paragraph(formData?.skills4 ? formData.skills4.join(", ") : "Skills not provided"),
 
             new Paragraph("LANGUAGES"),
             ...(formData?.languages || []).map(
@@ -106,8 +106,8 @@ const Preview4 = () => {
       setIsError(true);
       setIsErrorInfo(response.message);
     } else {
-      setIsLoading(false);
       navigate(`/cvs`);
+      setIsLoading(false);
     }
   };
 
@@ -175,7 +175,7 @@ const Preview4 = () => {
         <section style={{ marginBottom: "20px" }}>
           <h2 style={sectionHeaderStyle}>Skills</h2>
           <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {formData?.skills3?.map((skill, index) => (
+            {formData?.skills4?.map((skill, index) => (
               <span key={index} style={skillTagStyle}>{skill}</span>
             ))}
           </div>

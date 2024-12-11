@@ -15,10 +15,7 @@ import FallBackComponent from './components/Fallback';
 
 
 function App() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-
+  
   
 
   return (
