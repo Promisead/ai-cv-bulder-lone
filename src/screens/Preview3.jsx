@@ -111,7 +111,7 @@ const Preview3 = () => {
 
             new Paragraph("CERTIFICATION"),
             ...(dummyData?.certifications || []).map(
-              (cert) => new Paragraph(`${cert.title} | ${cert.organization}`)
+              (cert) => new Paragraph(`${cert}`)
             ),
 
             new Paragraph("TECHNICAL SKILLS"),
@@ -234,7 +234,7 @@ const Preview3 = () => {
         <section>
           <h2 className="border-b pb-2 text-lg font-semibold">CERTIFICATION</h2>
           {(dummyData?.certifications || []).map((cert, index) => (
-            <p key={index}>{cert.title || "Certification"} | {cert.organization || "Organization"}</p>
+            <p key={index}>{cert || "Certification"} </p>
           ))}
         </section>
 

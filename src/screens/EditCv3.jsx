@@ -56,7 +56,7 @@ const CVForm3 = () => {
         const { name, value } = e.target;
         const updatedExperiences = [...formData.experiences];
         if (name === 'responsibility') {
-            updatedExperiences[index].responsibilities.push(value);
+            updatedExperiences[index].responsibilities = [value];
         } else {
             updatedExperiences[index][name] = value;
         }

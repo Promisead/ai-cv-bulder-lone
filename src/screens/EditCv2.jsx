@@ -46,7 +46,8 @@ const CvForm = () => {
       { title: '', institution: '', year: '' },
       { title: '', institution: '', year: '' }
     ],
-    skills: { R: '', Spanish: '', Mandarin: '' }
+    skills: { R: '', Spanish: '', Mandarin: '' },
+    cvTemplateType: 'template2'
   });
 
 
