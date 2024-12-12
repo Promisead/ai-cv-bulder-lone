@@ -17,7 +17,7 @@ const CVForm3 = () => {
         experiences: [
             { title: '', company: '', duration: '', location: '', responsibilities: [''] },
         ],
-        education: { degree: '', institution: '', duration: '' },
+        educations: { degree: '', institution: '', duration: '' },
         certifications: [],
         skills3: '',
         cvTemplateType: 'template3'
@@ -28,9 +28,6 @@ const CVForm3 = () => {
     let [isLoading, setIsLoading] = useState(false)
 
     let dispatch = useDispatch();
-
-
-
     let { user } = useSelector(state => state.userAuth); // Fetch user from Redux store
 
     // Protect the dashboard - if no user is present, redirect to login
@@ -71,7 +68,7 @@ const CVForm3 = () => {
 
     const handleEducationChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({ ...prevData, education: { ...prevData.education, [name]: value } }));
+        setFormData((prevData) => ({ ...prevData, educations: { ...prevData.educations, [name]: value } }));
     };
 
     const handleCertificationsChange = (e) => {
@@ -211,19 +208,19 @@ const CVForm3 = () => {
                         <div>
                             <label>
                                 Degree:</label>
-                            <input type="text" name="degree" value={formData.education.degree} onChange={handleEducationChange} required />
+                            <input type="text" name="degree" value={formData.educations.degree} onChange={handleEducationChange} required />
 
                         </div>
                         <div>
                             <label>
                                 Institution:</label>
-                            <input type="text" name="institution" value={formData.education.institution} onChange={handleEducationChange} required />
+                            <input type="text" name="institution" value={formData.educations.institution} onChange={handleEducationChange} required />
 
                         </div>
                         <div>
                             <label>
                                 Duration:</label>
-                            <input type="text" name="duration" value={formData.education.duration} onChange={handleEducationChange} required />
+                            <input type="text" name="duration" value={formData.educations.duration} onChange={handleEducationChange} required />
 
                         </div>
 

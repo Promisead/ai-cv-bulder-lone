@@ -37,7 +37,7 @@ const CVForm = () => {
             { title: '', company: '', location: '', dateRange: '', responsibilities: [''] },
         ],
         education: { degree: '', institution: '', dateRange: '' },
-        skills3: [''],
+        skills4: [''],
         languages: [{ language: '', proficiency: '' }],
         cvTemplateType: 'template4'
     });
@@ -79,13 +79,13 @@ const CVForm = () => {
     };
 
     const handleSkillChange = (index, value) => {
-        const updatedSkills = [...formData.skills3];
+        const updatedSkills = [...formData.skills4];
         updatedSkills[index] = value;
-        setFormData({ ...formData, skills3: updatedSkills });
+        setFormData({ ...formData, skills4: updatedSkills });
     };
 
     const handleAddSkill = () => {
-        setFormData((prevData) => ({ ...prevData, skills3: [...prevData.skills3, ''] }));
+        setFormData((prevData) => ({ ...prevData, skills4: [...prevData.skills4, ''] }));
     };
     
     
@@ -166,7 +166,7 @@ const CVForm = () => {
                         <input type="text" name="dateRange" placeholder="Date Range" onChange={handleEducationChange} />
 
                         <h2>Skills</h2>
-                        {formData.skills3.map((skill, index) => (
+                        {formData.skills4.map((skill, index) => (
                             <input
                                 key={index}
                                 type="text"

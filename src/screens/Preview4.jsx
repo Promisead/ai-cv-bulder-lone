@@ -143,13 +143,22 @@ const Preview4 = () => {
         </header>
 
         {/* Additional Sections */}
-        {/* Sections like About Me, Experience, Education, Skills, Languages, etc., go here */}
+        {/* Sections like About Me, Experience, Education, Skills, Languages, etc., go here 
+        
+        <p style={{ fontWeight: "bold", margin: "5px 0" }}>
+                formData.aboutMe:
+              </p>
+        */}
+          <h2 style={sectionHeaderStyle}>About Me</h2>
+         <p style={{  margin: "5px 0" }}>
+                {formData.aboutMe}
+              </p>
 
         <section style={{ marginBottom: "20px" }}>
           <h2 style={sectionHeaderStyle}>Experience</h2>
           {formData?.experiences?.map((exp, index) => (
             <div key={index} style={{ marginBottom: "10px" }}>
-              <h3 style={jobTitleStyle}>{exp?.title || "Job Title Not Provided"}</h3>
+              <p style={jobTitleStyle}>{exp?.title || "Job Title Not Provided"}</p>
               <p style={{ fontWeight: "bold", margin: "5px 0" }}>
                 {exp?.company || "Company Not Provided"} | {exp?.location || "Location Not Provided"} | {exp?.dateRange || "Date Range Not Provided"}
               </p>

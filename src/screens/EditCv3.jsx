@@ -8,6 +8,7 @@ import Loader from "../components/loader";
 
 const CVForm3 = () => {
     const { cv,user } = useSelector(state => state.userAuth);
+    console.log(cv)
  
     const [formData, setFormData] = useState({
         name: '',
@@ -19,7 +20,7 @@ const CVForm3 = () => {
         experiences: [
             { title: '', company: '', duration: '', location: '', responsibilities: [''] },
         ],
-        education: { degree: '', institution: '', duration: '' },
+        educations: { degree: '', institution: '', duration: '' },
         certifications: [],
         skills3: '',
         cvTemplateType: 'template3'
@@ -65,7 +66,7 @@ const CVForm3 = () => {
 
     const handleEducationChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({ ...prevData, education: { ...prevData.education, [name]: value } }));
+        setFormData((prevData) => ({ ...prevData, educations: { ...prevData.educations, [name]: value } }));
     };
 
     const handleCertificationsChange = (e) => {
@@ -173,7 +174,7 @@ const CVForm3 = () => {
                                 <div>
                                     <label>
                                         Responsibilities:</label>
-                                    <textarea name="responsibility" onChange={(e) => handleExperienceChange(index, e)} />
+                                    <textarea name="responsibility" onChange={(e) => handleExperienceChange(index, e)} value={experience.responsibilities} />
 
                                 </div>
                             </div>
@@ -183,19 +184,19 @@ const CVForm3 = () => {
                         <div>
                             <label>
                                 Degree:</label>
-                            <input type="text" name="degree" value={formData.education.degree} onChange={handleEducationChange} required />
+                            <input type="text" name="degree" value={formData.educations.degree} onChange={handleEducationChange} required />
 
                         </div>
                         <div>
                             <label>
                                 Institution:</label>
-                            <input type="text" name="institution" value={formData.education.institution} onChange={handleEducationChange} required />
+                            <input type="text" name="institution" value={formData.educations.institution} onChange={handleEducationChange} required />
 
                         </div>
                         <div>
                             <label>
                                 Duration:</label>
-                            <input type="text" name="duration" value={formData.education.duration} onChange={handleEducationChange} required />
+                            <input type="text" name="duration" value={formData.educations.duration} onChange={handleEducationChange} required />
 
                         </div>
 
@@ -203,7 +204,7 @@ const CVForm3 = () => {
                         <div>
                             <label>
                                 Certifications (comma-separated):</label>
-                            <input type="text" name="certifications" onChange={handleCertificationsChange} />
+                            <input type="text" name="certifications" value={formData.certifications} onChange={handleCertificationsChange} />
 
                         </div>
 
@@ -215,7 +216,7 @@ const CVForm3 = () => {
 
                         </div>
 
-                        <button type="submit" className="submit-button">Generate CV</button>
+                        <button type="submit" className="submit-button">Update CV</button>
                     </form>
                 </div>
             </div>

@@ -1,4 +1,3 @@
-
 import './preview2.css';
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import html2pdf from "html2pdf.js";
@@ -25,8 +24,6 @@ const Preview3 = () => {
   const handleFetchHandler = useCallback(
     async (cvId) => {
       setIsLoading(true);
-
-      // Dispatch action or handle form submission
       let response = await dispatch(fetchSpecificCv(cvId));
       if (!response.bool) {
         setIsLoading(false);
@@ -37,14 +34,12 @@ const Preview3 = () => {
       setDummyData(response.message);
       setIsLoading(false);
     },
-    [dispatch] // Dependencies to avoid unnecessary re-creation
+    [dispatch]
   );
-
 
   useEffect(() => {
     if (!cvId) {
       setDummyData(formData)
-
       if (!isCvAvailable) {
         return navigate('/template');
       }
@@ -54,17 +49,9 @@ const Preview3 = () => {
     if (!isCvAvailable) {
       handleFetchHandler(cvId);
     }
-    // If both `isCvAvailable` and `cvId` are true, do nothing (implicitly handled).
   }, [isCvAvailable, cvId, handleFetchHandler]);
 
-
   const shareUrl = window.location.origin + `/preview/${id}` + `/${cvId ? cvId : formData._id}`;
-
-
-
-
-
-
 
   const downloadPDF = () => {
     const element = cvRef.current;
@@ -115,7 +102,7 @@ const Preview3 = () => {
             ),
 
             new Paragraph("TECHNICAL SKILLS"),
-            new Paragraph(dummyData?.skills3 ? dummyData.skills3.join(", ") : ""),
+            new Paragraph(dummyData?.skills3 ? dummyData.skills3 : ""),
 
             new Paragraph("Powered by Enhancv"),
           ],
@@ -145,7 +132,6 @@ const Preview3 = () => {
     return <div>No CV available</div>;
   }
 
-  //deleteCv
   const deleteHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -161,37 +147,32 @@ const Preview3 = () => {
   };
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
-
 
   if (isError) {
-    return <Modal content={isErrorInfo} closeModal={() => setIsError(false)} />
+    return <Modal content={isErrorInfo} closeModal={() => setIsError(false)} />;
   }
 
-  
-
-
   return (
-    <div className="w-full flex justify-center items-center h-screen px-40 p-100 " style={{ width: '100vw',paddingTop:'500px' }}>
+    <div className="w-full flex justify-center items-center min-h-screen p-4 sm:px-8 lg:px-32 xl:px-48 pt-10 pb-40">
       <div
         ref={cvRef}
-        className="shadow-lg p-4 mb-4 bg-white rounded"
+        className="shadow-lg p-4 bg-white rounded-lg w-full max-w-3xl"
         style={{
           fontFamily: "Arial, sans-serif",
-          maxWidth: "800px",
           lineHeight: 1.5,
         }}
       >
-        <header className="mb-4">
-          <h1 className="text-2xl font-bold">{dummyData?.name || "Full Name"}</h1>
-          <p className="text-lg text-gray-500">{dummyData?.profile || "Profile Title"}</p>
-          <div className="text-base mt-2">
+        <header className="mb-6 mt-500">
+          <h1 className="text-2xl font-semibold text-gray-800">{dummyData?.name || "Full Name"}</h1>
+          <p className="text-lg text-gray-600">{dummyData?.profile || "Profile Title"}</p>
+          <div className="mt-4 text-base text-gray-500">
             <p>
               <span>📞 {dummyData?.phone || "+1-000-000"} </span> |
               <span> ✉️ {dummyData?.email || "email@example.com"} </span> |
               <span>
-                🔗 <a href={dummyData?.linkedin || "#"} className="text-blue-500 underline">{dummyData?.linkedin || "linkedin.com"}</a>
+                🔗 <a href={dummyData?.linkedin || "#"} className="text-blue-500 hover:underline">{dummyData?.linkedin || "linkedin.com"}</a>
               </span>
             </p>
             <p>📍 {dummyData?.location || "New York City, NY"}</p>
@@ -199,21 +180,21 @@ const Preview3 = () => {
         </header>
 
         <section>
-          <h2 className="border-b pb-2 text-lg font-semibold">PROFILE</h2>
+          <h2 className="border-b pb-2 text-lg font-semibold text-gray-700">PROFILE</h2>
           <p>{dummyData?.profile || "Result-oriented project team leader with experience covering project and product management."}</p>
         </section>
 
         <section>
-          <h2 className="border-b pb-2 text-lg font-semibold">PROFESSIONAL EXPERIENCE</h2>
+          <h2 className="border-b pb-2 text-lg font-semibold text-gray-700">PROFESSIONAL EXPERIENCE</h2>
           {(dummyData?.experiences || []).map((job, index) => (
-            <div key={index} className="mb-4">
-              <h3 className="text-lg font-bold">{job.role}</h3>
-              <p>
-                <strong>{job.company}</strong> | {job.startDate} - {job.endDate} | {job.location}
+            <div key={index} className="mb-6">
+              <h3 className="text-lg font-semibold text-gray-800">{job.role}</h3>
+              <p className="text-gray-600">
+                <strong>{job.company}xxxx</strong> | {job.startDate} - {job.endDate} | {job.location}
               </p>
-              <ul className="list-disc list-inside">
+              <ul className="list-disc ml-5">
                 {job.responsibilities.map((responsibility, resIndex) => (
-                  <li key={resIndex}>{responsibility}</li>
+                  <li key={resIndex} className="text-gray-500">{responsibility}</li>
                 ))}
               </ul>
             </div>
@@ -221,64 +202,60 @@ const Preview3 = () => {
         </section>
 
         <section>
-          <h2 className="border-b pb-2 text-lg font-semibold">EDUCATION</h2>
-          {(dummyData?.education || []).map((edu, index) => (
-            <div key={index}>
-              <p><strong>{edu.degree || "Degree"}</strong></p>
-              <p>{edu.institution || "Institution"}</p>
-              <p>{edu.startDate || "Start Date"} - {edu.endDate || "End Date"}</p>
+          <h2 className="border-b pb-2 text-lg font-semibold text-gray-700">EDUCATION</h2>
+        
+            <div className="mb-4">
+              <p className="text-gray-700"><strong>{dummyData?.educations.degree || "Degree"}</strong></p>
+              <p className="text-gray-600">{dummyData?.educations.institution || "Institution"}</p>
+              <p className="text-gray-500">{dummyData?.educations.duration || "Start Date"}</p>
             </div>
-          ))}
+       
         </section>
 
         <section>
-          <h2 className="border-b pb-2 text-lg font-semibold">CERTIFICATION</h2>
+          <h2 className="border-b pb-2 text-lg font-semibold text-gray-700">CERTIFICATION</h2>
           {(dummyData?.certifications || []).map((cert, index) => (
-            <p key={index}>{cert || "Certification"} </p>
+            <p key={index} className="text-gray-500">{cert || "Certification"}</p>
           ))}
         </section>
 
         <section>
-          <h2 className="border-b pb-2 text-lg font-semibold">TECHNICAL SKILLS</h2>
-          <p>
-            {dummyData?.skills3
-              ? dummyData.skills3.split(",").join(", ")
-              : "Technical Skills"}
-          </p>
+          <h2 className="border-b pb-2 text-lg font-semibold text-gray-700">TECHNICAL SKILLS</h2>
+          <p className="text-gray-600">{dummyData?.skills3 ? dummyData.skills3 : "Technical Skills"}</p>
         </section>
 
         {isCvAvailable ? (
           <>
-            <div className="flex flex-col sm:flex-row justify-between mt-4 space-y-2 sm:space-y-0">
+            <div className="flex flex-col sm:flex-row justify-between mt-6 space-y-3 sm:space-y-0 sm:space-x-4">
               <button
                 onClick={downloadPDF}
-                className="bg-blue-500 text-white px-4 py-2 rounded shadow-sm hover:bg-blue-600"
+                className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700"
               >
                 Download PDF
               </button>
               <button
                 onClick={downloadDOCX}
-                className="bg-blue-500 text-white px-4 py-2 rounded shadow-sm hover:bg-blue-600"
+                className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700"
               >
                 Download DOCX
               </button>
               <button
                 onClick={editHandler}
-                className="bg-blue-500 text-white px-4 py-2 rounded shadow-sm hover:bg-blue-600"
+                className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-green-700"
               >
                 Edit CV
               </button>
               <button
                 onClick={deleteHandler}
-                className="bg-blue-500 text-white px-4 py-2 rounded shadow-sm hover:bg-blue-600"
+                className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-700"
               >
                 Delete CV
               </button>
             </div>
 
-            <div className="text-center mt-3">
+            <div className="text-center mt-6">
               <h3 className="text-lg font-semibold">Share your CV</h3>
-              <div className="flex justify-center space-x-2">
+              <div className="flex justify-center space-x-3">
                 <FacebookShareButton url={shareUrl} quote="Check out my CV!" className="hover:opacity-80">
                   <FacebookIcon size={32} round />
                 </FacebookShareButton>
@@ -297,11 +274,11 @@ const Preview3 = () => {
         ) : null}
       </div>
     </div>
-
   );
 };
 
 export default Preview3;
+
 
 
 
