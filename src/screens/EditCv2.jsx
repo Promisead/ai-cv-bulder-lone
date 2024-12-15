@@ -76,7 +76,8 @@ const CvForm = () => {
     }
     setIsLoading(false)
     console.log(formData)
-    navigate(`/preview/${formData.cvTemplateType}`)
+    //navigate(`/preview/${formData.cvTemplateType}`)
+    window.location.href = `/cvs`;
   }
 
 

@@ -93,7 +93,7 @@ const CVForm3 = () => {
         }
         setIsLoading(false)
         console.log(formData)
-        navigate(`/preview/${formData.cvTemplateType}`)
+        window.location.href = `/cvs`;
     }
 
     let closeModal = () => {

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import html2pdf from "html2pdf.js";
 import { Document, Packer, Paragraph } from "docx";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Modal from '../components/Modal/Modal';
 import Loader from "../components/loader";
 import { deleteCv } from "../store/action/userAppStorage";
@@ -17,7 +17,7 @@ const Preview4 = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
-  let location = useLocation()
+  let location = useLocation();
   const shareUrl = window.location.origin + location.pathname;
 
   const downloadPDF = () => {
@@ -45,7 +45,6 @@ const Preview4 = () => {
             new Paragraph(formData?.address || "Address"),
             new Paragraph("ABOUT ME"),
             new Paragraph(formData?.aboutMe || "Description not provided"),
-
             new Paragraph("EXPERIENCE"),
             ...(formData?.experiences || []).map(
               (exp) =>
@@ -53,7 +52,6 @@ const Preview4 = () => {
                   `${exp.title || "Job Title"} - ${exp.company || "Company"} | ${exp.dateRange || "Date Range"}`
                 )
             ),
-
             new Paragraph("EDUCATION"),
             ...(formData?.education || []).map(
               (edu) =>
@@ -61,10 +59,8 @@ const Preview4 = () => {
                   `${edu.degree || "Degree"} - ${edu.institution || "Institution"} | ${edu.dateRange || "Date Range"}`
                 )
             ),
-
             new Paragraph("SKILLS"),
             new Paragraph(formData?.skills4 ? formData.skills4.join(", ") : "Skills not provided"),
-
             new Paragraph("LANGUAGES"),
             ...(formData?.languages || []).map(
               (lang) => new Paragraph(`${lang.language} - ${lang.proficiency}`)
@@ -116,53 +112,38 @@ const Preview4 = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', width: '100vw' }}>
+    <div className="container mx-auto p-6">
       {isLoading && <Loader />}
       {isError && <Modal content={isErrorInfo} closeModal={closeModal} />}
       <div
         ref={cvRef}
+        className="bg-white p-8 rounded-lg shadow-xl max-w-3xl mx-auto transition-all duration-500 ease-out transform hover:scale-105"
         style={{
           fontFamily: "Georgia, serif",
-          maxWidth: "800px",
-          margin: "auto",
-          padding: "40px",
-          backgroundColor: "#fff",
-          color: "#333",
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 12px 24px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <header style={{ textAlign: "center", marginBottom: "30px" }}>
-          <h1 style={{ fontSize: "36px", margin: "0" }}>{formData?.name || "Name Not Provided"}</h1>
-          <p style={{ fontSize: "20px", fontStyle: "italic", margin: "0" }}>
-            {formData?.jobTitle || "Job Title Not Provided"}
-          </p>
-          <div style={{ fontSize: "16px", marginTop: "10px" }}>
+        <header className="text-center mb-10">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">{formData?.name || "Name Not Provided"}</h1>
+          <p className="text-xl italic text-gray-600">{formData?.jobTitle || "Job Title Not Provided"}</p>
+          <div className="text-lg text-gray-700 mt-4">
             <p>{formData?.address || "Address Not Provided"}</p>
             <p>Tel: {formData?.phone || "Phone Not Provided"} | {formData?.email || "Email Not Provided"}</p>
           </div>
         </header>
 
-        {/* Additional Sections */}
-        {/* Sections like About Me, Experience, Education, Skills, Languages, etc., go here 
-        
-        <p style={{ fontWeight: "bold", margin: "5px 0" }}>
-                formData.aboutMe:
-              </p>
-        */}
-          <h2 style={sectionHeaderStyle}>About Me</h2>
-         <p style={{  margin: "5px 0" }}>
-                {formData.aboutMe}
-              </p>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">About Me</h2>
+          <p className="text-lg text-gray-700">{formData?.aboutMe || "No description provided"}</p>
+        </section>
 
-        <section style={{ marginBottom: "20px" }}>
-          <h2 style={sectionHeaderStyle}>Experience</h2>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Experience</h2>
           {formData?.experiences?.map((exp, index) => (
-            <div key={index} style={{ marginBottom: "10px" }}>
-              <p style={jobTitleStyle}>{exp?.title || "Job Title Not Provided"}</p>
-              <p style={{ fontWeight: "bold", margin: "5px 0" }}>
-                {exp?.company || "Company Not Provided"} | {exp?.location || "Location Not Provided"} | {exp?.dateRange || "Date Range Not Provided"}
-              </p>
-              <ul style={responsibilitiesListStyle}>
+            <div key={index} className="mb-6 hover:bg-gray-50 p-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+              <p className="text-xl font-semibold text-gray-800">{exp?.title || "Job Title"}</p>
+              <p className="text-lg font-medium text-gray-600">{exp?.company || "Company"} | {exp?.location || "Location"} | {exp?.dateRange || "Date Range"}</p>
+              <ul className="list-disc pl-6 text-gray-600">
                 {exp?.responsibilities?.map((responsibility, i) => (
                   <li key={i}>{responsibility}</li>
                 ))}
@@ -171,73 +152,86 @@ const Preview4 = () => {
           ))}
         </section>
 
-        <section style={{ marginBottom: "20px" }}>
-          <h2 style={sectionHeaderStyle}>Education</h2>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Education</h2>
           {formData?.education?.map((edu, index) => (
-            <div key={index}>
-              <p style={{ fontWeight: "bold", fontSize: "18px", margin: "5px 0" }}>{edu?.degree || "Degree Not Provided"}</p>
-              <p>{edu?.institution || "Institution Not Provided"} | {edu?.dateRange || "Date Range Not Provided"}</p>
+            <div key={index} className="mb-4 hover:bg-gray-50 p-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+              <p className="text-lg font-semibold text-gray-800">{edu?.degree || "Degree"}</p>
+              <p className="text-gray-600">{edu?.institution || "Institution"} | {edu?.dateRange || "Date Range"}</p>
             </div>
           ))}
         </section>
 
-        <section style={{ marginBottom: "20px" }}>
-          <h2 style={sectionHeaderStyle}>Skills</h2>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Skills</h2>
+          <div className="flex flex-wrap gap-4">
             {formData?.skills4?.map((skill, index) => (
-              <span key={index} style={skillTagStyle}>{skill}</span>
+              <span key={index} className="bg-gray-200 px-4 py-2 rounded-lg text-gray-700 text-sm transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-300">
+                {skill}
+              </span>
             ))}
           </div>
         </section>
 
-        <section style={{ marginBottom: "20px" }}>
-          <h2 style={sectionHeaderStyle}>Languages</h2>
-          <ul style={responsibilitiesListStyle}>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Languages</h2>
+          <ul className="list-disc pl-6 text-gray-600">
             {formData?.languages?.map((lang, index) => (
               <li key={index}>{lang.language} - {lang.proficiency}</li>
             ))}
           </ul>
         </section>
 
-        <div className="d-flex flex-column flex-sm-row justify-content-between mt-4">
-          <button onClick={downloadPDF} className="btn btn-primary shadow-sm mb-2 mb-sm-0">
+        <div className="flex flex-col sm:flex-row justify-between mt-8 space-y-4 sm:space-y-0 sm:space-x-4">
+          <button
+            onClick={downloadPDF}
+            className="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-blue-700 hover:shadow-2xl transition duration-300 ease-in-out"
+          >
             Download PDF
           </button>
-          <button onClick={downloadDOCX} className="btn btn-primary shadow-sm mb-2 mb-sm-0">
+          <button
+            onClick={downloadDOCX}
+            className="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-blue-700 hover:shadow-2xl transition duration-300 ease-in-out"
+          >
             Download DOCX
           </button>
-          <button onClick={editHandler} className="btn btn-primary shadow-sm mb-2 mb-sm-0">
+          <button
+            onClick={editHandler}
+            className="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-blue-700 hover:shadow-2xl transition duration-300 ease-in-out"
+          >
             Edit CV
           </button>
-          <button onClick={deleteHandler} className="btn btn-primary shadow-sm mb-2 mb-sm-0">
+          <button
+            onClick={deleteHandler}
+            className="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-blue-700 hover:shadow-2xl transition duration-300 ease-in-out"
+          >
             Delete CV
           </button>
         </div>
 
-        <div className="social-share-buttons text-center mt-3">
-        <h3>Share your CV</h3>
-        <div className="share-buttons-container">
-          <FacebookShareButton url={shareUrl} quote="Check out my CV!" className="share-button">
-            <FacebookIcon size={32} round />
-          </FacebookShareButton>
-          <TwitterShareButton url={shareUrl} title="Check out my CV!" className="share-button">
-            <TwitterIcon size={32} round />
-          </TwitterShareButton>
-          <LinkedinShareButton url={shareUrl} className="share-button">
-            <LinkedinIcon size={32} round />
-          </LinkedinShareButton>
-          <WhatsappShareButton url={shareUrl} title="Check out my CV!" className="share-button">
-            <WhatsappIcon size={32} round />
-          </WhatsappShareButton>
+        <div className="text-center mt-8">
+          <h3 className="text-xl font-semibold text-gray-800 mb-4">Share your CV</h3>
+          <div className="flex justify-center gap-6">
+            <FacebookShareButton url={shareUrl} quote="Check out my CV!" className="transform hover:scale-110 transition duration-300 ease-in-out">
+              <FacebookIcon size={32} round />
+            </FacebookShareButton>
+            <TwitterShareButton url={shareUrl} title="Check out my CV!" className="transform hover:scale-110 transition duration-300 ease-in-out">
+              <TwitterIcon size={32} round />
+            </TwitterShareButton>
+            <LinkedinShareButton url={shareUrl} className="transform hover:scale-110 transition duration-300 ease-in-out">
+              <LinkedinIcon size={32} round />
+            </LinkedinShareButton>
+            <WhatsappShareButton url={shareUrl} title="Check out my CV!" className="transform hover:scale-110 transition duration-300 ease-in-out">
+              <WhatsappIcon size={32} round />
+            </WhatsappShareButton>
+          </div>
         </div>
-      </div>
-
-
-
       </div>
     </div>
   );
 };
+
+
 
 const sectionHeaderStyle = {
   fontSize: "22px",

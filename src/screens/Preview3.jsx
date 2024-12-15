@@ -16,7 +16,7 @@ const Preview3 = () => {
   const [isError, setIsError] = useState(false);
   const [isErrorInfo, setIsErrorInfo] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [dummyData, setDummyData] = useState({})
+  const [dummyData, setDummyData] = useState({});
   const dispatch = useDispatch();
 
   const { id, cv: cvId } = useParams();
@@ -39,11 +39,11 @@ const Preview3 = () => {
 
   useEffect(() => {
     if (!cvId) {
-      setDummyData(formData)
+      setDummyData(formData);
       if (!isCvAvailable) {
         return navigate('/template');
       }
-      setIsLoading(false)
+      setIsLoading(false);
       return;
     }
     if (!isCvAvailable) {
@@ -51,7 +51,7 @@ const Preview3 = () => {
     }
   }, [isCvAvailable, cvId, handleFetchHandler]);
 
-  const shareUrl = window.location.origin + `/preview/${id}` + `/${cvId ? cvId : formData._id}`;
+  const shareUrl = window.location.origin + `/preview/${id}/${cvId ? cvId : formData._id}`;
 
   const downloadPDF = () => {
     const element = cvRef.current;
@@ -79,7 +79,6 @@ const Preview3 = () => {
             new Paragraph(dummyData?.location || "Location"),
             new Paragraph("PROFILE"),
             new Paragraph(dummyData?.profile || "Profile Description"),
-
             new Paragraph("PROFESSIONAL EXPERIENCE"),
             ...(dummyData?.experiences || []).map(
               (job) =>
@@ -87,7 +86,6 @@ const Preview3 = () => {
                   `${job.role} - ${job.company} | ${job.startDate} - ${job.endDate} | ${job.location}`
                 )
             ),
-
             new Paragraph("EDUCATION"),
             ...(dummyData?.education || []).map(
               (edu) =>
@@ -95,16 +93,13 @@ const Preview3 = () => {
                   `${edu.degree} - ${edu.institution} | ${edu.startDate} - ${edu.endDate}`
                 )
             ),
-
             new Paragraph("CERTIFICATION"),
             ...(dummyData?.certifications || []).map(
               (cert) => new Paragraph(`${cert}`)
             ),
-
             new Paragraph("TECHNICAL SKILLS"),
-            new Paragraph(dummyData?.skills3 ? dummyData.skills3 : ""),
-
-            new Paragraph("Powered by Enhancv"),
+            new Paragraph(dummyData?.skills3 || "Technical Skills"),
+            new Paragraph("Poweblue by Enhancv"),
           ],
         },
       ],
@@ -142,7 +137,7 @@ const Preview3 = () => {
       setIsErrorInfo(response.message);
     } else {
       setIsLoading(false);
-      navigate(`/cvs`);
+      navigate('/cvs');
     }
   };
 
@@ -155,17 +150,17 @@ const Preview3 = () => {
   }
 
   return (
-    <div className="w-full flex justify-center items-center min-h-screen p-4 sm:px-8 lg:px-32 xl:px-48 pt-10 pb-40">
+    <div className="w-full flex justify-center items-center min-h-screen p-6 sm:px-8 lg:px-20 xl:px-32 pt-10 pb-12">
       <div
         ref={cvRef}
-        className="shadow-lg p-4 bg-white rounded-lg w-full max-w-3xl"
+        className="shadow-xl transform transition duration-300 ease-in-out p-6 bg-white rounded-lg w-full max-w-3xl hover:scale-105"
         style={{
           fontFamily: "Arial, sans-serif",
           lineHeight: 1.5,
         }}
       >
-        <header className="mb-6 mt-500">
-          <h1 className="text-2xl font-semibold text-gray-800">{dummyData?.name || "Full Name"}</h1>
+        <header className="mb-6">
+          <h1 className="text-3xl font-semibold text-gray-800 transition duration-300 hover:text-blue-500">{dummyData?.name || "Full Name"}</h1>
           <p className="text-lg text-gray-600">{dummyData?.profile || "Profile Title"}</p>
           <div className="mt-4 text-base text-gray-500">
             <p>
@@ -180,17 +175,17 @@ const Preview3 = () => {
         </header>
 
         <section>
-          <h2 className="border-b pb-2 text-lg font-semibold text-gray-700">PROFILE</h2>
+          <h2 className="border-b pb-2 text-xl font-semibold text-gray-700">PROFILE</h2>
           <p>{dummyData?.profile || "Result-oriented project team leader with experience covering project and product management."}</p>
         </section>
 
         <section>
-          <h2 className="border-b pb-2 text-lg font-semibold text-gray-700">PROFESSIONAL EXPERIENCE</h2>
+          <h2 className="border-b pb-2 text-xl font-semibold text-gray-700">PROFESSIONAL EXPERIENCE</h2>
           {(dummyData?.experiences || []).map((job, index) => (
             <div key={index} className="mb-6">
               <h3 className="text-lg font-semibold text-gray-800">{job.role}</h3>
               <p className="text-gray-600">
-                <strong>{job.company}xxxx</strong> | {job.startDate} - {job.endDate} | {job.location}
+                <strong>{job.company}</strong> | {job.startDate} - {job.endDate} | {job.location}
               </p>
               <ul className="list-disc ml-5">
                 {job.responsibilities.map((responsibility, resIndex) => (
@@ -202,52 +197,52 @@ const Preview3 = () => {
         </section>
 
         <section>
-          <h2 className="border-b pb-2 text-lg font-semibold text-gray-700">EDUCATION</h2>
-        
-            <div className="mb-4">
-              <p className="text-gray-700"><strong>{dummyData?.educations.degree || "Degree"}</strong></p>
-              <p className="text-gray-600">{dummyData?.educations.institution || "Institution"}</p>
-              <p className="text-gray-500">{dummyData?.educations.duration || "Start Date"}</p>
+          <h2 className="border-b pb-2 text-xl font-semibold text-gray-700">EDUCATION</h2>
+          {(dummyData?.education || []).map((edu, index) => (
+            <div key={index} className="mb-4">
+              <p className="text-gray-700"><strong>{edu.degree || "Degree"}</strong></p>
+              <p className="text-gray-600">{edu.institution || "Institution"}</p>
+              <p className="text-gray-500">{edu.startDate || "Start Date"} - {edu.endDate || "End Date"}</p>
             </div>
-       
+          ))}
         </section>
 
         <section>
-          <h2 className="border-b pb-2 text-lg font-semibold text-gray-700">CERTIFICATION</h2>
+          <h2 className="border-b pb-2 text-xl font-semibold text-gray-700">CERTIFICATION</h2>
           {(dummyData?.certifications || []).map((cert, index) => (
             <p key={index} className="text-gray-500">{cert || "Certification"}</p>
           ))}
         </section>
 
         <section>
-          <h2 className="border-b pb-2 text-lg font-semibold text-gray-700">TECHNICAL SKILLS</h2>
-          <p className="text-gray-600">{dummyData?.skills3 ? dummyData.skills3 : "Technical Skills"}</p>
+          <h2 className="border-b pb-2 text-xl font-semibold text-gray-700">TECHNICAL SKILLS</h2>
+          <p className="text-gray-600">{dummyData?.skills3 || "Technical Skills"}</p>
         </section>
 
         {isCvAvailable ? (
           <>
-            <div className="flex flex-col sm:flex-row justify-between mt-6 space-y-3 sm:space-y-0 sm:space-x-4">
+            <div className="flex flex-col sm:flex-row justify-between mt-6 space-y-4 sm:space-y-0 sm:space-x-4">
               <button
                 onClick={downloadPDF}
-                className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700"
+                className="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none transform transition duration-300 ease-in-out hover:scale-105"
               >
                 Download PDF
               </button>
               <button
                 onClick={downloadDOCX}
-                className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700"
+                className="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none transform transition duration-300 ease-in-out hover:scale-105"
               >
                 Download DOCX
               </button>
               <button
                 onClick={editHandler}
-                className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-green-700"
+                className="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none transform transition duration-300 ease-in-out hover:scale-105"
               >
                 Edit CV
               </button>
               <button
                 onClick={deleteHandler}
-                className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-700"
+                className="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none transform transition duration-300 ease-in-out hover:scale-105"
               >
                 Delete CV
               </button>
@@ -255,17 +250,17 @@ const Preview3 = () => {
 
             <div className="text-center mt-6">
               <h3 className="text-lg font-semibold">Share your CV</h3>
-              <div className="flex justify-center space-x-3">
-                <FacebookShareButton url={shareUrl} quote="Check out my CV!" className="hover:opacity-80">
+              <div className="flex justify-center space-x-3 mt-3">
+                <FacebookShareButton url={shareUrl} quote="Check out my CV!" className="hover:opacity-80 transition duration-200 transform hover:scale-110">
                   <FacebookIcon size={32} round />
                 </FacebookShareButton>
-                <TwitterShareButton url={shareUrl} title="Check out my CV!" className="hover:opacity-80">
+                <TwitterShareButton url={shareUrl} title="Check out my CV!" className="hover:opacity-80 transition duration-200 transform hover:scale-110">
                   <TwitterIcon size={32} round />
                 </TwitterShareButton>
-                <LinkedinShareButton url={shareUrl} className="hover:opacity-80">
+                <LinkedinShareButton url={shareUrl} className="hover:opacity-80 transition duration-200 transform hover:scale-110">
                   <LinkedinIcon size={32} round />
                 </LinkedinShareButton>
-                <WhatsappShareButton url={shareUrl} title="Check out my CV!" className="hover:opacity-80">
+                <WhatsappShareButton url={shareUrl} title="Check out my CV!" className="hover:opacity-80 transition duration-200 transform hover:scale-110">
                   <WhatsappIcon size={32} round />
                 </WhatsappShareButton>
               </div>
@@ -278,6 +273,9 @@ const Preview3 = () => {
 };
 
 export default Preview3;
+
+
+
 
 
 

@@ -110,7 +110,8 @@ const CVForm = () => {
             setIsErrorInfo(response.message);
         } else {
             setIsLoading(false);
-            navigate(`/preview/${formData.cvTemplateType}`);
+           // navigate(`/preview/${formData.cvTemplateType}`);
+           window.location.href = `/cvs`;
         }
     };
 

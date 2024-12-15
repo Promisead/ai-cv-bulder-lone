@@ -143,7 +143,8 @@ const EditCVForm = () => {
         } else {
             setIsLoading(false);
             // Navigate to the preview page based on the selected template
-            navigate(`/preview/${formData.cvTemplateType}`);
+            //navigate(`/preview/${formData.cvTemplateType}`);
+            window.location.href = `/cvs`;
         }
     };
 

@@ -87,7 +87,7 @@ const CVForm = () => {
     }
     setIsLoading(false)
     console.log(formData)
-    navigate(`/preview/${formData.cvTemplateType}`)
+    window.location.href = `/cvs`;
   }
 
 
@@ -332,15 +332,19 @@ const CVForm = () => {
                 />
                 <textarea
                   placeholder="Responsibilities"
-                  value={work.responsibilities.join(', ')}
+                  value={work.responsibilities.join('\n')} // Join the responsibilities with a new line
                   onChange={(e) => {
-                    const responsibilities = e.target.value.split(',').map(res => res.trim());
+                    // Split input by new lines instead of commas
+                    const responsibilities = e.target.value.split('\n').map(res => res.trim());
                     const workExperience = [...formData.workExperience];
                     workExperience[index].responsibilities = responsibilities;
                     setFormData({ ...formData, workExperience });
                   }}
                   required // Make this field required
                 />
+
+
+
               </div>
             ))}
             <button type="button" onClick={handleAddWorkExperience}>Add Another Work Experience</button>

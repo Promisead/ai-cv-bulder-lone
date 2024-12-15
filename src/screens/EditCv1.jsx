@@ -76,18 +76,27 @@ const CVForm = () => {
 
   const handleSubmitHandler = async (e) => {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
+  
     // Dispatch action or handle form submission
-    let response = await dispatch(updateCv(formData))
+    let response = await dispatch(updateCv(formData));
+  
     if (!response.bool) {
-      setIsLoading(false)
-      setIsError(true)
-      setIsErrorInfo(response.message)
+      setIsLoading(false);
+      setIsError(true);
+      setIsErrorInfo(response.message);
+      return; // Exit the function early if there was an error
     }
-    setIsLoading(false)
-    console.log(formData)
-    navigate(`/preview/${formData.cvTemplateType}`)
-  }
+  
+    // If successful, set isLoading to false and navigate
+    setIsLoading(false);
+    console.log(formData); // You may want to remove or handle this in production
+  
+    // Navigate to the preview page after a successful update
+    //navigate(`/preview/${formData.cvTemplateType}`);
+    window.location.href = `/cvs`;
+  };
+  
 
   let closeModal = () => {
     setIsError(false)
