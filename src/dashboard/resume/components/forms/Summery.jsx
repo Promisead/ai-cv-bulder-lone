@@ -54,7 +54,7 @@ function Summery({enabledNext}) {
     }
     return (
     <div>
-         <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
+         <div className='p-5 shadow-lg rounded-lg border-t-[#2563EB] border-t-4 mt-10'>
         <h2 className='font-bold text-lg'>Summary</h2>
         <p>Add Summary for your job title</p>
 
@@ -62,7 +62,7 @@ function Summery({enabledNext}) {
             <div className='flex justify-between items-end'>
                 <label>Add Summary</label>
                 <Button variant="outline" onClick={()=>GenerateSummeryFromAI()} 
-                type="button" size="sm" className="border-primary text-primary flex gap-2"> 
+                type="button" size="sm" className="border-[#2563EB] text-[#2563EB] flex gap-2"> 
                 <Brain className='h-4 w-4' />  Generate from AI</Button>
             </div>
             <Textarea className="mt-5" required
@@ -71,7 +71,7 @@ function Summery({enabledNext}) {
             onChange={(e)=>setSummery(e.target.value)}
             />
             <div className='mt-2 flex justify-end'>
-            <Button type="submit"
+            <Button type="submit"  className="flex gap-2 bg-[#2563EB] text-white hover:bg-blue-700"
                 disabled={loading}>
                     {loading?<LoaderCircle className='animate-spin' />:'Save'}
                     </Button>
@@ -86,7 +86,7 @@ function Summery({enabledNext}) {
                 <div key={index} 
                 onClick={()=>setSummery(item?.summary)}
                 className='p-5 shadow-lg my-4 rounded-lg cursor-pointer'>
-                    <h2 className='font-bold my-1 text-primary'>Level: {item?.experience_level}</h2>
+                    <h2 className='font-bold my-1 text-[#2563EB]'>Level: {item?.experience_level}</h2>
                     <p>{item?.summary}</p>
                 </div>
             ))}

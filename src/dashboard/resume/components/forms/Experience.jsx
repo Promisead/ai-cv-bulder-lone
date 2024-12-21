@@ -99,7 +99,7 @@ function Experience() {
 
   return (
     <div>
-        <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
+        <div className='p-5 shadow-lg rounded-lg border-t-[#2563EB] border-t-4 mt-10'>
         <h2 className='font-bold text-lg'>Professional Experience</h2>
         <p>Add Your previous Job experience</p>
         <div>
@@ -159,11 +159,11 @@ function Experience() {
         </div>
         <div className='flex justify-between'>
             <div className='flex gap-2'>
-            <Button variant="outline" onClick={AddNewExperience} className="text-primary"> + Add More Experience</Button>
-            <Button variant="outline" onClick={RemoveExperience} className="text-primary"> - Remove</Button>
+            <Button variant="outline" onClick={AddNewExperience} className="text-[#2563EB]"> + Add More Experience</Button>
+            <Button variant="outline" onClick={RemoveExperience} className="text-[#2563EB]"> - Remove</Button>
 
             </div>
-            <Button disabled={loading} onClick={()=>onSave()}>
+            <Button  className="flex gap-2 bg-[#2563EB] text-white hover:bg-blue-700" disabled={loading} onClick={()=>onSave()}>
             {loading?<LoaderCircle className='animate-spin' />:'Save'}    
             </Button>
         </div>

@@ -85,12 +85,17 @@ function AddResume() {
               />
             </DialogDescription>
             <div className="flex justify-end gap-5 ">
-              <Button   onClick={() => setOpenDialog(false)}  variant="outline">
+              <Button     className="bg-gray-200 text-gray-700 hover:bg-gray-300"   onClick={() => setOpenDialog(false)}  variant="outline">
                 Cancel
               </Button>
-              <Button 
+              <Button
                 disabled={!resumeTitle || loading}
                 onClick={() => onCreate()}
+                className={`${
+                  !resumeTitle || loading
+                    ? "bg-blue-300 cursor-not-allowed"
+                    : "bg-[#2563EB] text-white hover:bg-blue-700"
+                }`}
               >
                 {loading ? <Loader2 className="animate-spin" /> : "Create"}
               </Button>

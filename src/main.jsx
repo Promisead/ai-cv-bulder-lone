@@ -102,7 +102,7 @@ const AppWrapper = () => {
       children: [
         {
           path: "/ai",
-          element: <Dashboard />,
+          element: user ? <Dashboard /> : <LoginPage />,
         },
         
       ],

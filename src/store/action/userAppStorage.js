@@ -9,6 +9,11 @@ export const DELETE_CV = "DELETE_CV";
 export const REFRESH_LOGIN = "REFRESH_LOGIN";
 export const LOGOUT = "LOGOUT";
 
+
+/* ${import.meta.env.VITE_API_BASE_URL2} */
+/* ${import.meta.env.VITE_API_BASE_URL2} */
+/* https://cv-frontend2.onrender.com */
+
 let calculateRemainingTime = (hoursUntilExpiry) => {
   const currentTime = new Date().getTime();
   const expirationTime = currentTime + hoursUntilExpiry * 60 * 60 * 1000; // Convert hours to milliseconds
@@ -78,7 +83,7 @@ export const autoLogin = () => {
 
     // Optionally validate the token with the server
     try {
-      const response = await fetch(`http://localhost:8080/validate-token`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/validate-token`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -124,7 +129,7 @@ export const autoLogin = () => {
 export const signup = (data) => {
   return async (dispatch, getState) => {
     try {
-      const response = await fetch(`http://localhost:8080/signup`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -188,7 +193,7 @@ export const login = (data) => {
     let userData = data;
     // Do some check on the server if it's actually login before proceeding to dispatch
     try {
-      const response = await fetch(`http://localhost:8080/login`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -233,7 +238,7 @@ export const makeCv = (data) => {
     try {
       const { userAuth } = getState();
       // Access specific slice of the state
-      const response = await fetch(`http://localhost:8080/makecv/${userAuth.user._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/makecv/${userAuth.user._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -283,7 +288,7 @@ export const updateCv = (data) => {
   return async (dispatch, getState) => {
     try {
       const { userAuth } = getState(); // Access user authentication data
-      const response = await fetch(`http://localhost:8080/updatecv/${userAuth.user._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/updatecv/${userAuth.user._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -339,7 +344,7 @@ export const deleteCv = (data) => {
   return async (dispatch, getState) => {
     try {
       const { userAuth } = getState(); // Access user authentication data
-      const response = await fetch(`http://localhost:8080/deletecv/${userAuth.user._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/deletecv/${userAuth.user._id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
@@ -392,7 +397,7 @@ export const fetchCv = (id) => {
   return async (dispatch, getState) => {
     //do some check on the server if its actually login before proceding to dispatch
     try {
-      const response = await fetch(`http://localhost:8080/cvs/${id}`)
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/cvs/${id}`)
       if (response.status === 404) {
         let data = await response.json()
         return {
@@ -435,7 +440,7 @@ export const fetchSpecificCv = (id) => {
   return async (dispatch, getState) => {
     //do some check on the server if its actually login before proceding to dispatch
     try {
-      const response = await fetch(`http://localhost:8080/cv/${id}`)
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/cv/${id}`)
       if (response.status === 404) {
         let data = await response.json()
         return {
@@ -472,7 +477,7 @@ export const fetchSpecificCv = (id) => {
 export const updateUser = (data) => {
   return async (dispatch, getState) => {
     try {
-      const response = await fetch(`http://localhost:8080/updateaccount/${data._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/updateaccount/${data._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -522,7 +527,7 @@ export const initiatePlan = (data) => {
 
   return async (dispatch, getState) => {
     try {
-      const response = await fetch(`http://localhost:8080/initiateplan`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/initiateplan`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -585,7 +590,7 @@ export const initiatePlan = (data) => {
 export const VerifySubscription = (data) => {
   return async (dispatch, getState) => {
     try {
-      const response = await fetch(`http://localhost:8080/verify-payment/${data}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL2}/verify-payment/${data}`, {
         method: 'GET',  
         headers: {
           'Content-Type': 'application/json',

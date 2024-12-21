@@ -76,7 +76,7 @@ function Education() {
     })
   },[educationalList])
   return (
-    <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
+    <div className='p-5 shadow-lg rounded-lg border-t-[#2563EB] border-t-4 mt-10'>
     <h2 className='font-bold text-lg'>Education</h2>
     <p>Add Your educational details</p>
 
@@ -129,11 +129,11 @@ function Education() {
     </div>
     <div className='flex justify-between'>
             <div className='flex gap-2'>
-            <Button variant="outline" onClick={AddNewEducation} className="text-primary"> + Add More Education</Button>
-            <Button variant="outline" onClick={RemoveEducation} className="text-primary"> - Remove</Button>
+            <Button variant="outline" onClick={AddNewEducation} className="text-[#2563EB]"> + Add More Education</Button>
+            <Button variant="outline" onClick={RemoveEducation} className="text-[#2563EB]"> - Remove</Button>
 
             </div>
-            <Button disabled={loading} onClick={()=>onSave()}>
+            <Button  className="flex gap-2 bg-[#2563EB] text-white hover:bg-blue-700" disabled={loading} onClick={()=>onSave()}>
             {loading?<LoaderCircle className='animate-spin' />:'Save'}    
             </Button>
         </div>

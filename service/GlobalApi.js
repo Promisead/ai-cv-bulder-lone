@@ -3,9 +3,10 @@ import axios from "axios";
 
 //import.meta.env.VITE_STRAPI_API_KEY;
 //meta.env.VITE_API_BASE_URL
-const API_KEY='481f1b10a81db97cad352f8e8bdd20186adcca5cc8f053cb9d11dedf4163cf637074cdf588b51cc41fdaf2d953e9525dad57724608964d9daec7dc7bdf453a87c1d49fd0ff1bda119dafb8f675b4dbfc4db347233a4';
+const API_KEY=import.meta.env.VITE_STRAPI_API_KEY;
 const axiosClient=axios.create({
-    baseURL:'http//:localhost:8080',
+    baseURL:import.meta.env.VITE_API_BASE_URL+"/api/",
+  
     headers:{
         'Content-Type':'application/json',
         'Authorization':`Bearer ${API_KEY}`

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/action/userAppStorage";
 import Modal from "../components/Modal/Modal";
@@ -10,6 +9,9 @@ import cv2 from "../assets/cv2.webp";
 import cv3 from "../assets/cv3.jpg";
 import cv4 from "../assets/cv4.jpg";
 import cv5 from "../assets/cv5.jpg";
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from '../components/ui/button'
+
 
 
 const Dashboard = () => {
@@ -82,11 +84,14 @@ const Dashboard = () => {
       {isError && (
         <Modal content={isErrorInfo} closeModal={() => setIsError(false)} />
       )}
-      <div className="mt-0 flex min-h-screen bg-gray-50">
+       <div className="flex mt-0 min-h-screen bg-gray-50">
         {/* Sidebar */}
-        <div className={`w-64 min-h-screen bg-blue-800 text-white ${sidebarOpen ? 'block' : 'hidden'} sm:block`}>
-          <div className="flex justify-between items-center p-4 border-b border-blue-900">
-            <h4 className="text-xl font-semibold text-center">Dashboard</h4>
+        <div
+          className={`w-64 min-h-screen bg-blue-800 text-white ${
+            sidebarOpen ? "block" : "hidden"
+          } sm:block`}
+        >
+          <div className="flex justify-between items-center p-6 border-b border-blue-900">
             <button
               className="text-white sm:hidden"
               onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -94,38 +99,71 @@ const Dashboard = () => {
               ☰
             </button>
           </div>
-          <nav className="flex flex-col px-4 py-6">
+          <nav className="flex flex-col px-4">
+            <div className=" flex shadow-lg justify-between items-center space-x-6 w-full px-4 py-4 mb-4">
+              <FaUserCircle size={35} className="text-white" />
+              <h6
+                onClick={handleLogout}
+                className="  text-white py-2 px-6 rounded-lg  transition duration-200"
+              >
+                {user.username}
+              </h6>
+            </div>
             <button
-              onClick={() => { setActiveTab('myCVs'); navigate('/cvs'); }}
-              className={`text-white py-3 px-4 rounded-md ${activeTab === 'myCVs' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
+              onClick={() => {
+                setActiveTab("myCVs");
+                navigate("/cvs");
+              }}
+              className={`text-white  py-3 px-4 rounded-md ${
+                activeTab === "myCVs" ? "bg-blue-700" : "hover:bg-blue-700"
+              } mb-2`}
             >
               My CVs
             </button>
-
             <button
               onClick={() => {
                 setActiveTab("ai");
                 navigate("/ai");
               }}
-              className="text-white py-3 px-4 rounded-md hover:bg-blue-700 mb-2"
+              className={`text-white py-3 px-4 rounded-md ${
+                activeTab === "ai" ? "bg-blue-700" : "hover:bg-blue-700"
+              } mb-2`}
             >
-              Create with AI
+              Crea8 with AI
             </button>
+
             <button
-              onClick={() => { setActiveTab('templates'); navigate('/template'); }}
-              className={`text-white py-3 px-4 rounded-md ${activeTab === 'templates' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
+              onClick={() => {
+                setActiveTab("templates");
+                navigate("/template");
+              }}
+              className={`text-white py-3 px-4 rounded-md ${
+                activeTab === "templates" ? "bg-blue-700" : "hover:bg-blue-700"
+              } mb-2`}
             >
               Templates
             </button>
             <button
-              onClick={() => { setActiveTab('profileSettings'); navigate('/profilesetting'); }}
-              className={`text-white py-3 px-4 rounded-md ${activeTab === 'profileSettings' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
+              onClick={() => {
+                setActiveTab("profileSettings");
+                navigate("/profilesetting");
+              }}
+              className={`text-white py-3 px-4 rounded-md ${
+                activeTab === "profileSettings"
+                  ? "bg-blue-700"
+                  : "hover:bg-blue-700"
+              } mb-2`}
             >
               Profile Settings
             </button>
             <button
-              onClick={() => { setActiveTab('pricing'); navigate('/pricing'); }}
-              className={`text-white py-3 px-4 rounded-md ${activeTab === 'pricing' ? 'bg-blue-700' : 'hover:bg-blue-700'} mb-2`}
+              onClick={() => {
+                setActiveTab("pricing");
+                navigate("/pricing");
+              }}
+              className={`text-white py-3 px-4 rounded-md ${
+                activeTab === "pricing" ? "bg-blue-700" : "hover:bg-blue-700"
+              } mb-2`}
             >
               Pricing Plans
             </button>
@@ -138,19 +176,22 @@ const Dashboard = () => {
           </nav>
         </div>
 
-
         {/* Main Content */}
-        <div className="flex-1">
-          <div className="flex justify-between items-center bg-white shadow-lg p-4">
-            <div className="flex items-center space-x-6 w-full px-4">
-              <FaUserCircle size={35} className="text-blue-600" />
-              <button
-                onClick={handleLogout}
-                className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-200"
-              >
-                Logout
-              </button>
-            </div>
+         {/* Header */}
+
+         <div className="flex-1 p-3 pt-0" >
+                    <div className="flex justify-between items-center mb-6 bg-white shadow-lg p-4">
+                        <div className="flex items-center justify-between space-x-6 w-full px-4">
+                        <Link to={"/cvs"} >
+                        <Button className="text-white bg-[#3A60D0]">Dashboard</Button>
+                        </Link>
+                            <button
+                                onClick={handleLogout}
+                                className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-200"
+                            >
+                                Logout
+                            </button>
+                        </div>
             <button
               className="sm:hidden text-white bg-blue-600 py-2 px-4 rounded-lg hover:bg-blue-700"
               onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -159,7 +200,7 @@ const Dashboard = () => {
             </button>
           </div>
 
-          <section className="templates-section p-6 bg-gray-50">
+          <section className="templates-section p-6 bg-gray-50 mt-32">
             <p className="intro-text text-lg md:text-xl text-gray-700 font-medium text-center mb-6">
               A great job application leads to a good interview. An amazing resume is what makes it all possible. Here are the Best Templates for you to choose from.
             </p>

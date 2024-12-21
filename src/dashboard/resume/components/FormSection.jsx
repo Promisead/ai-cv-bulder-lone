@@ -18,7 +18,7 @@ function FormSection() {
         <div className='flex justify-between items-center'>
           <div className='flex gap-5'>
           {activeFormIndex>1
-            &&<Button size="sm" 
+            &&<Button  className="flex gap-2 bg-[#2563EB] text-white hover:bg-blue-700" size="sm" 
             onClick={()=>setActiveFormIndex(activeFormIndex-1)}> <ArrowLeft/>   Back</Button> }
          
          
@@ -32,7 +32,7 @@ function FormSection() {
             onClick={()=>setActiveFormIndex(activeFormIndex-1)}> <ArrowLeft/> </Button> } */}
             <Button 
             disabled={!enableNext}
-            className="flex gap-2" size="sm"
+            className="flex gap-2 bg-[#2563EB] text-white hover:bg-blue-700" size="sm"
             onClick={()=>setActiveFormIndex(activeFormIndex+1)}
             > Next 
             <ArrowRight/> </Button>

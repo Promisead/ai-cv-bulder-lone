@@ -69,7 +69,7 @@ function Skills() {
         })
     },[skillsList])
   return (
-    <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
+    <div className='p-5 shadow-lg rounded-lg border-t-[#2563EB] border-t-4 mt-10'>
     <h2 className='font-bold text-lg'>Skills</h2>
     <p>Add Your top professional key skills</p>
 
@@ -90,11 +90,11 @@ function Skills() {
     </div>
     <div className='flex justify-between'>
             <div className='flex gap-2'>
-            <Button variant="outline" onClick={AddNewSkills} className="text-primary"> + Add More Skill</Button>
-            <Button variant="outline" onClick={RemoveSkills} className="text-primary"> - Remove</Button>
+            <Button variant="outline" onClick={AddNewSkills} className="text-[#2563EB]"> + Add More Skill</Button>
+            <Button variant="outline" onClick={RemoveSkills} className="text-[#2563EB]"> - Remove</Button>
 
             </div>
-            <Button disabled={loading} onClick={()=>onSave()}>
+            <Button  className="flex gap-2 bg-[#2563EB] text-white hover:bg-blue-700" disabled={loading} onClick={()=>onSave()}>
             {loading?<LoaderCircle className='animate-spin' />:'Save'}    
             </Button>
         </div>

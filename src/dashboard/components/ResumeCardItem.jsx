@@ -114,14 +114,14 @@ function ResumeCardItem({ resume, refreshData }) {
               <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
               <AlertDialogDescription>
                 This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+                Resume and remove your data from our servers.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel onClick={() => setOpenAlert(false)}>
+              <AlertDialogCancel   className="bg-gray-200 text-gray-700 hover:bg-gray-300"  onClick={() => setOpenAlert(false)}>
                 Cancel
               </AlertDialogCancel>
-              <AlertDialogAction onClick={onDelete} disabled={loading}>
+              <AlertDialogAction className="bg-[#2563EB] text-white hover:bg-blue-700" onClick={onDelete} disabled={loading}>
                 {loading ? <Loader2Icon className="animate-spin" /> : "Delete"}
               </AlertDialogAction>
             </AlertDialogFooter>

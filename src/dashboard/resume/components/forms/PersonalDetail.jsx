@@ -50,7 +50,7 @@ function PersonalDetail({enabledNext}) {
         
     }
   return (
-    <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
+    <div className='p-5 shadow-lg rounded-lg border-t-[#2563EB] border-t-4 mt-10'>
         <h2 className='font-bold text-lg'>Personal Detail</h2>
         <p>Get Started with the basic information</p>
 
@@ -91,7 +91,7 @@ function PersonalDetail({enabledNext}) {
                 </div>
             </div>
             <div className='mt-3 flex justify-end'>
-                <Button type="submit"
+                <Button  className="flex gap-2 bg-[#2563EB] text-white hover:bg-blue-700" type="submit"
                 disabled={loading}>
                     {loading?<LoaderCircle className='animate-spin' />:'Save'}
                     </Button>

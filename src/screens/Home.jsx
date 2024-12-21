@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { FaFileInvoice } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -7,6 +6,8 @@ import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 import "./Home.css";
 import bannerImage from "../assets/image/banner.jpg";
 import Footer from "./Footer";
+import { FaLayerGroup, FaFileAlt, FaDownload, FaFileInvoice } from "react-icons/fa";
+
 
 const Crea8CV = () => {
   const navigate = useNavigate();
@@ -126,52 +127,39 @@ const MainContent = () => {
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 steps-list">
             {/* Step 1 */}
-            <div
-              className="steps-item flex flex-col items-center text-center"
-              data-aos="fade-up"
-            >
-              <div className="steps-item-icon w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full mb-4">
-                <a href="/template">
-                  <i className="fas fa-layer-group text-xl"></i>
-                </a>
-              </div>
-              <h3 className="text-lg font-bold">Choose Your Template</h3>
-              <p className="text-gray-600 mt-2">
-                Select from a variety of professional templates and colors to
-                create a standout resume.
-              </p>
-            </div>
+      <div className="steps-item flex flex-col items-center text-center" data-aos="fade-up">
+        <div className="steps-item-icon w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full mb-4">
+          <FaLayerGroup className="text-2xl" />
+        </div>
+        <h3 className="text-lg font-bold">Choose Your Template</h3>
+        <p className="text-gray-600 mt-2">
+          Select from a variety of professional templates and colors to
+          create a standout resume.
+        </p>
+      </div>
 
-            {/* Step 2 */}
-            <div
-              className="flex flex-col items-center text-center"
-              data-aos="fade-up"
-            >
-              <div className="w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full mb-4">
-                <a href="form.html">
-                  <i className="fas fa-file-alt text-xl"></i>
-                </a>
-              </div>
-              <h3 className="text-lg font-bold">Place Your Information</h3>
-              <p className="text-gray-600 mt-2">
-                Fill in your details and track your CV with a real-time preview.
-              </p>
-            </div>
+           {/* Step 2 */}
+      <div className="flex flex-col items-center text-center" data-aos="fade-up">
+        <div className="w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full mb-4">
+          <FaFileAlt className="text-2xl" />
+        </div>
+        <h3 className="text-lg font-bold">Place Your Information</h3>
+        <p className="text-gray-600 mt-2">
+          Fill in your details and track your CV with a real-time preview.
+        </p>
+      </div>
 
             {/* Step 3 */}
-            <div
-              className="flex flex-col items-center text-center"
-              data-aos="fade-up"
-            >
-              <div className="w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full mb-4">
-                <i className="fas fa-download text-xl"></i>
-              </div>
-              <h3 className="text-lg font-bold">Download Instantly</h3>
-              <p className="text-gray-600 mt-2">
-                Instantly download your resume in PDF format and share via a
-                link.
-              </p>
-            </div>
+      <div className="flex flex-col items-center text-center" data-aos="fade-up">
+        <div className="w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full mb-4">
+          <FaDownload className="text-2xl" />
+        </div>
+        <h3 className="text-lg font-bold">Download Instantly</h3>
+        <p className="text-gray-600 mt-2">
+          Instantly download your resume in PDF format and share via a
+          link.
+        </p>
+      </div>
           </div>
         </div>
       </section>
@@ -188,112 +176,113 @@ const PricingSection = () => {
 
   return (
     <section id="pricing" className="py-16 bg-gray-100">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10" data-aos="fade-up">
-          <h2 className="text-4xl font-bold text-blue-600">Choose Your Plan</h2>
-          <p className="text-lg text-gray-600 mt-3">
-            Select the perfect plan that suits your needs.
-          </p>
+  <div className="container mx-auto px-4">
+    <div className="text-center mb-10" data-aos="fade-up">
+      <h2 className="text-4xl font-bold text-blue-600">Choose Your Plan</h2>
+      <p className="text-lg text-gray-600 mt-3">
+        Select the perfect plan that suits your needs.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Basic Plan */}
+      <div
+        className="flex flex-col bg-blue-600 text-white shadow-lg rounded-lg p-6"
+        data-aos="fade-up"
+      >
+        <div className="text-center mb-4">
+          <h3 className="text-2xl font-semibold">Basic</h3>
         </div>
-
-        <div className="flex flex-wrap justify-center gap-8">
-          {/* Basic Plan */}
-          <div
-            className="max-w-sm bg-blue-600 text-white shadow-lg rounded-lg p-6"
-            data-aos="fade-up"
-          >
-            <div className="text-center mb-4">
-              <h3 className="text-2xl font-semibold">Basic</h3>
-            </div>
-            <div className="text-center mb-6">
-              <h4 className="text-5xl font-bold">$9</h4>
-              <p className="text-lg">Per month</p>
-            </div>
-            <ul className="space-y-4 mb-6">
-              <li className="flex items-center gap-3">
-                <i className="fa-solid fa-check"></i> 5 CV Templates
-              </li>
-              <li className="flex items-center gap-3">
-                <i className="fa-solid fa-check"></i> Download in PDF
-              </li>
-              <li className="flex items-center gap-3">
-                <i className="fa-solid fa-check"></i> Email Support
-              </li>
-            </ul>
-            <a
-              href="#"
-              className="block w-full bg-white text-blue-600 py-2 rounded-lg font-semibold text-center"
-            >
-              Get Started
-            </a>
-          </div>
-
-          {/* Pro Plan */}
-          <div
-            className="max-w-sm bg-white text-blue-600 shadow-lg rounded-lg p-6"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div className="text-center mb-4">
-              <h3 className="text-2xl font-semibold">Pro</h3>
-            </div>
-            <div className="text-center mb-6">
-              <h4 className="text-5xl font-bold">$19</h4>
-              <p className="text-lg text-gray-500">Per month</p>
-            </div>
-            <ul className="space-y-4 mb-6">
-              <li className="flex items-center gap-3">
-                <i className="fa-solid fa-check"></i> 15 CV Templates
-              </li>
-              <li className="flex items-center gap-3">
-                <i className="fa-solid fa-check"></i> Download in PDF and Word
-              </li>
-              <li className="flex items-center gap-3">
-                <i className="fa-solid fa-check"></i> Priority Email Support
-              </li>
-            </ul>
-            <a
-              href="#"
-              className="block w-full bg-blue-600 text-white py-2 rounded-lg font-semibold text-center"
-            >
-              Get Started
-            </a>
-          </div>
-
-          {/* Premium Plan */}
-          <div
-            className="max-w-sm bg-primary text-white shadow-lg rounded-lg p-6"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          >
-            <div className="text-center mb-4">
-              <h3 className="text-2xl font-semibold">Premium</h3>
-            </div>
-            <div className="text-center mb-6">
-              <h4 className="text-5xl font-bold">$29</h4>
-              <p className="text-lg">Per month</p>
-            </div>
-            <ul className="space-y-4 mb-6">
-              <li className="flex items-center gap-3">
-                <i className="fa-solid fa-check"></i> Unlimited CV Templates
-              </li>
-              <li className="flex items-center gap-3">
-                <i className="fa-solid fa-check"></i> Download in All Formats
-              </li>
-              <li className="flex items-center gap-3">
-                <i className="fa-solid fa-check"></i> 24/7 Support
-              </li>
-            </ul>
-            <a
-              href="#"
-              className="block w-full bg-white text-blue-600 py-2 rounded-lg font-semibold text-center"
-            >
-              Get Started
-            </a>
-          </div>
+        <div className="text-center mb-6">
+          <h4 className="text-5xl font-bold">$9</h4>
+          <p className="text-lg">Per month</p>
         </div>
+        <ul className="space-y-4 mb-6">
+          <li className="flex items-center gap-3">
+            <i className="fa-solid fa-check"></i> 5 CV Templates
+          </li>
+          <li className="flex items-center gap-3">
+            <i className="fa-solid fa-check"></i> Download in PDF
+          </li>
+          <li className="flex items-center gap-3">
+            <i className="fa-solid fa-check"></i> Email Support
+          </li>
+        </ul>
+        <a
+          href="/pricing"
+          className="mt-auto block w-full bg-white text-blue-600 py-2 rounded-lg font-semibold text-center"
+        >
+          Get Started
+        </a>
       </div>
-    </section>
+
+      {/* Pro Plan */}
+      <div
+        className="flex flex-col bg-white text-blue-600 shadow-lg rounded-lg p-6"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        <div className="text-center mb-4">
+          <h3 className="text-2xl font-semibold">Pro</h3>
+        </div>
+        <div className="text-center mb-6">
+          <h4 className="text-5xl font-bold">$19</h4>
+          <p className="text-lg text-gray-500">Per month</p>
+        </div>
+        <ul className="space-y-4 mb-6">
+          <li className="flex items-center gap-3">
+            <i className="fa-solid fa-check"></i> 15 CV Templates
+          </li>
+          <li className="flex items-center gap-3">
+            <i className="fa-solid fa-check"></i> Download in PDF and Word
+          </li>
+          <li className="flex items-center gap-3">
+            <i className="fa-solid fa-check"></i> Priority Email Support
+          </li>
+        </ul>
+        <a
+          href="/pricing"
+          className="mt-auto block w-full bg-blue-600 text-white py-2 rounded-lg font-semibold text-center"
+        >
+          Get Started
+        </a>
+      </div>
+
+      {/* Premium Plan */}
+      <div
+        className="flex flex-col bg-blue-700 text-white shadow-lg rounded-lg p-6"
+        data-aos="fade-up"
+        data-aos-delay="400"
+      >
+        <div className="text-center mb-4">
+          <h3 className="text-2xl font-semibold">Premium</h3>
+        </div>
+        <div className="text-center mb-6">
+          <h4 className="text-5xl font-bold">$29</h4>
+          <p className="text-lg">Per month</p>
+        </div>
+        <ul className="space-y-4 mb-6">
+          <li className="flex items-center gap-3">
+            <i className="fa-solid fa-check"></i> Unlimited CV Templates
+          </li>
+          <li className="flex items-center gap-3">
+            <i className="fa-solid fa-check"></i> Download in All Formats
+          </li>
+          <li className="flex items-center gap-3">
+            <i className="fa-solid fa-check"></i> 24/7 Support
+          </li>
+        </ul>
+        <a
+          href="/pricing"
+          className="mt-auto block w-full bg-white text-blue-600 py-2 rounded-lg font-semibold text-center"
+        >
+          Get Started
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
   );
 };
 

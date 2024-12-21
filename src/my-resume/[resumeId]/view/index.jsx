@@ -37,7 +37,7 @@ function ViewResume() {
                 <p className='text-center text-gray-400'>Now you are ready to download your resume and you can share unique 
                     resume url with your friends and family </p>
             <div className='flex justify-between px-44 my-10'>
-                <Button onClick={HandleDownload}>Download</Button>
+                <Button className="flex gap-2 bg-[#2563EB] text-white hover:bg-blue-700" onClick={HandleDownload}>Download</Button>
                
                 <RWebShare
         data={{
@@ -46,7 +46,7 @@ function ViewResume() {
           title: resumeInfo?.firstName+" "+resumeInfo?.lastName+" resume",
         }}
         onClick={() => console.log("shared successfully!")}
-      > <Button>Share</Button>
+      > <Button className="flex gap-2 bg-[#2563EB] text-white hover:bg-blue-700">Share</Button>
       </RWebShare>
             </div>
         </div>
